@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 22:53:01 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:09:32 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ void	type_unsigned_integer(t_format *format, va_list args)
 void	type_float(t_format *format, va_list args)
 {
 	if (format->size == NULL)
-	{
 		format->arg.s_double = va_arg(args, double);
-		format->arg.s_float = format->arg.s_double;
-	}
+	if (ft_strequ(format->size, "l") || ft_strequ(format->size, "L"))
+		format->arg.l_double = va_arg(args, long double);
+	if (format->precision == 0)
+		format->precision = 6;
+	format->convert = doubles;
 }
 
 void	type_other(t_format *format, va_list args)

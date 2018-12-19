@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 23:01:12 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 23:58:22 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef union	u_args{
 	unsigned int 			u_integer;
 	unsigned long int 		ul_integer;
 	unsigned long long int	ull_integer;
-	float					s_float;
 	double					s_double;
 	long double				l_double;
 	char					*string;
@@ -90,4 +89,5 @@ void			u_integer(t_format *format);
 void			binary(t_format *format);
 void			octal(t_format *format);
 void			hexadecimal(t_format *format);
+void			doubles(t_format *format);
 #endif

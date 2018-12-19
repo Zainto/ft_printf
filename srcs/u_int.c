@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:40:24 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 19:39:43 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 23:37:44 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,18 @@ static char		*ft_uitoa(unsigned int n)
 	return (dst);
 }
 */
+
 void			u_integer(t_format *format)
 {
-	format->output = ft_ullitoa(format->arg.u_integer);
+	char *tmp;
+
+	if (ft_strequ(format->size, "l"))
+		tmp = ft_ullitoa(format->arg.l_integer);
+	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
+		tmp = ft_ullitoa(format->arg.ll_integer);
+	else
+		tmp = ft_ullitoa(format->arg.integer);
+	format->output = tmp;
+	ft_strdel(&tmp);
 	return ;
 }

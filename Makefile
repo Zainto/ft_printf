@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/19 22:55:32 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/20 00:00:38 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,19 +51,21 @@ LIPATH =libft/includes/
 
 INCS = ft_printf.h
 
+SRCS += main.c
 SRCS += ft_printf.c
 SRCS += format.c
 SRCS += extract.c
 SRCS += type.c
-SRCS += main.c
-SRCS += addr.c
-SRCS += string.c
-SRCS += digit.c
 SRCS += char.c
+SRCS += digit.c
 SRCS += u_int.c
-SRCS += octal.c
 SRCS += binary.c
+SRCS += octal.c
 SRCS += hexadecimal.c
+SRCS += doubles.c
+SRCS += string.c
+SRCS += pointer.c
+
 DSYM = $(NAME).dSYM
 
 OBJS = $(patsubst %.c, $(OPATH)%.o, $(SRCS))
