@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/19 02:19:03 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/19 02:57:02 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ LPATH =libft/
 LIPATH =libft/includes/
 
 INCS = ft_printf.h
-SRCS += ft_vprintf.c
 SRCS += ft_printf.c
 SRCS += format.c
 SRCS += extract.c
