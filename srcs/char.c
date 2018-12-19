@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   char.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 10:09:48 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 21:54:21 by cempassi         ###   ########.fr       */
+/*   Created: 2018/12/18 16:36:59 by nrechati          #+#    #+#             */
+/*   Updated: 2018/12/19 18:45:32 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "ft_printf.h"
 
-int		ft_putstr(char const *str)
+void	character(t_format *format)
 {
-	if (!str || !*str)
-		return (0);
-	return (write(1, str, ft_strlen(str)));
+	format->output = ft_strdup(&format->arg.character);
+	return ;
 }

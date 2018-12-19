@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 02:22:01 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:08:05 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void		extract_type(char **spec, t_format *format, va_list args)
 	else if (ft_strchr(UNSIGNED, format->type))
 		type_unsigned_integer(format, args);
 	else if (ft_strchr(FLOAT, format->type))
-		type_unsigned_integer(format, args);
+		type_float(format, args);
 }

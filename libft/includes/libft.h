@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 12:34:49 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 00:19:38 by cempassi         ###   ########.fr       */
+/*   Created: 2018/12/19 21:55:01 by cempassi          #+#    #+#             */
+/*   Updated: 2018/12/19 23:16:06 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct		s_file{
 
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
+char				*ft_llitoa(long long n);
+char				*ft_ullitoa(unsigned long long int n);
+long long			ft_atoll_base(char *str, char *base);
+unsigned long long	ft_atoull_base(char *str, char *base);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 int					ft_isalpha(int c);
@@ -83,6 +87,7 @@ char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 size_t				ft_strlen(const char *s);
 char				*ft_strstr(const char *haystack, const char *needle);
+char				*ft_strrev(char *str);
 char				*ft_strnstr(const char *haystack, const char *needle,\
 					size_t len);
 

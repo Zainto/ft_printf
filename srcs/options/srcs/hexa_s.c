@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   hexa_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 10:09:48 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 21:54:21 by cempassi         ###   ########.fr       */
+/*   Created: 2018/12/19 13:26:07 by nrechati          #+#    #+#             */
+/*   Updated: 2018/12/19 14:17:18 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "../includes/unitest.h"
 
-int		ft_putstr(char const *str)
+void	printf_x(t_format *format)
 {
-	if (!str || !*str)
-		return (0);
-	return (write(1, str, ft_strlen(str)));
+	char	*dst;
+
+	dst = ft_itoa(format->d);
+	dst = ft_convert_base(dst, TEN, HEXA_SMALL);
+	format->output = dst;
+	return ;
 }

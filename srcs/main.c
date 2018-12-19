@@ -6,78 +6,31 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 14:28:54 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:22:04 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "ft_printf.h"
-
-char			*printformat(t_format *format)
-{
-	char	*info;
-
-	info = ft_strnew(0);
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	if(format->flag_minus == 1)
-		info = ft_strinsert(&info, '-', ft_strlen(info));
-	if(format->flag_plus == 1)
-		info = ft_strinsert(&info, '+', ft_strlen(info));
-	if(format->flag_zero == 1)
-		info = ft_strinsert(&info, '0', ft_strlen(info));
-	if(format->flag_space == 1)
-		info = ft_strinsert(&info, ' ', ft_strlen(info));
-	if(format->flag_hashtag == 1)
-		info = ft_strinsert(&info, '#', ft_strlen(info));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, ft_itoa(format->width));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, ft_itoa(format->precision));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, format->size);
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strinsert(&info, format->type, ft_strlen(info));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	if (format->type == 's')
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strjoin(info, format->arg.string);
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	if (format->type == 'c')
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strinsert(&info, format->arg.character, ft_strlen(info));
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	if (format->type == 'd' && format->size == NULL)
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strjoin(info, ft_itoa(format->arg.integer));
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	if (format->type == 'd' && ft_strequ(format->size, "ll"))
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strjoin(info, ft_itoa(format->arg.ll_integer));
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	return (info);
-}
+#include "limits.h"
 
 int		main(void)
 {
 	char	a;
-	long long int b;
+	char	*str;
+	float	num;
+	int 	b;
+	int		r_printf;
+	int		r_ftprintf;
 
-	a = 98;
-	b = 40;
-	printf("Salut %X\n", -4033);
-	ft_printf("Salut %+.33c mais %lld %.*Ls", a, b, 22, "Esperons que tout se passe bien");
+
+	num = 45.4563879;
+	str = "Salut, comment ca va?";
+	b = -4000;
+	a = 'Z';
+	r_printf = printf("float: %.7f\n", num);
+	r_ftprintf = ft_printf("float: %.7f\n", num);
+	printf("Result printf = %d | Result ft_printf = %d\n", r_printf, r_ftprintf);
 	return (0);
 }

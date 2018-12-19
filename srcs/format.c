@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 03:14:03 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 16:44:18 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,15 @@ int				output(const char *format, t_list *node)
 	if (*format == '%')
 	{
 		tmp = (t_format *)(node->data);
-		conv = printformat(tmp);
+		if(tmp->convert)
+		{
+			tmp->convert(tmp);
+			conv = tmp->output;
+		}
+		else
+		{
+			conv = "[not supported]";
+		}
 		return (ft_ringbuffer(conv) + output(format + tmp->diff, node->next));
 	}
 	return (format_to_buffer(&format) + output(format, node));
