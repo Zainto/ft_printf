@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   extract.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 01:58:16 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:22:01 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		extract_flags(char **spec, t_format *format)
 {
-	if (!ft_strchr(FLAGS,**spec))
+	if (!ft_strchr(FLAGS, **spec))
 		return ;
 	if (**spec == '-')
 		format->flag_minus = 1;
@@ -62,7 +62,7 @@ void		extract_precision(char **spec, t_format *format, va_list args)
 	format->diff++;
 	if (**spec == '*')
 	{
-		format->precision =  va_arg(args, int);
+		format->precision = va_arg(args, int);
 		format->diff++;
 		*spec += 1;
 	}

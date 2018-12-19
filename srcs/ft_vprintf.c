@@ -6,15 +6,14 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:24:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 02:17:46 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:24:08 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-
-t_list		*parser(char *spec, va_list args)
+t_list			*parser(char *spec, va_list args)
 {
 	t_format	format;
 	t_list		*node;

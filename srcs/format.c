@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 01:21:13 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:23:10 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int		format_to_buffer(const char **format)
 
 static void		format_convert(const char **format, t_list **lst, va_list args)
 {
-	t_list		*node;
-	char		*spec;
+	t_list			*node;
+	char			*spec;
 
 	spec = ft_strsub(*format, 0, ft_strcspn(*format, TYPE) + 1);
 	node = parser(spec, args);
@@ -75,8 +75,8 @@ t_list			*format_list(const char *format, va_list args)
 
 int				format_output(const char *format, t_list *current, int result)
 {
-	t_format *tmp;
-	char		*convert;
+	t_format		*tmp;
+	char			*convert;
 
 	if (!*format)
 		return ((result += ft_ringbuffer(NULL)));
