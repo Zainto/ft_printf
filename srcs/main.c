@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:22:04 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:30:31 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int		main(void)
 
 	num = 45.4563879;
 	str = "Salut, comment ca va?";
-	b = -4000;
+	b = 5000;
 	a = 'Z';
-	r_printf = printf("float: %.7f\n", num);
-	r_ftprintf = ft_printf("float: %.7f\n", num);
+	r_printf = printf(": %.7f\n", num);
+	r_ftprintf = ft_printf("binary: %b\n", b);
 	printf("Result printf = %d | Result ft_printf = %d\n", r_printf, r_ftprintf);
 	return (0);
 }

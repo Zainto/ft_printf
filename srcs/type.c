@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:09:32 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:29:32 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	type_signed_integer(t_format *format, va_list args)
 t_convert	 unsigned_convert(t_format *format)
 {
 	if (format->type == 'b')
-		return (octal);
+		return (binary);
 	if (format->type == 'o')
 		return (octal);
 	if (format->type == 'x' || format->type == 'X')
