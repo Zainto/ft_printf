@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 10:19:59 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 13:29:41 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:16:25 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void			printf_p(t_format *format)
 	uintptr_t	addr;
 
 	addr = (uintptr_t)&format->p;
-	printf("Doing Addr conversion !\n");
 	tmp = ft_itoa_unintptr(addr);
 	dst = ft_convert_base(tmp, TEN, HEXA_SMALL);
 	free(tmp);
