@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.c                                           :+:      :+:    :+:   */
+/*   char.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 09:45:19 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 11:35:42 by nrechati         ###   ########.fr       */
+/*   Created: 2018/12/18 16:36:59 by nrechati          #+#    #+#             */
+/*   Updated: 2018/12/19 12:01:11 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unitest.h"
+#include "../includes/unitest.h"
 
-void	printf_s(t_format *format)
+void	printf_c(t_format *format)
 {
-	printf("Doing String conversion !\n");
-	format->output = ft_strdup(format->str);
+	printf("Doing Char conversion !\n");
+	format->output = ft_strdup(&format->c);
 	return ;
 }

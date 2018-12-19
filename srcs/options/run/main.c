@@ -6,11 +6,11 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:41:01 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 11:40:15 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:02:53 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unitest.h"
+#include "../includes/unitest.h"
 
 static int 		get_opt_gettho(char **av)
 {
@@ -24,6 +24,16 @@ static int 		get_opt_gettho(char **av)
 		return (3);
 	if (av[1][1] == 'd' || av[1][1] == 'i')
 		return (4);
+	if (av[1][1] == 'o')
+		return (5);
+	if (av[1][1] == 'u')
+		return (6);
+	if (av[1][1] == 'x')
+		return (7);
+	if (av[1][1] == 'X')
+		return (8);
+	if (av[1][1] == 'f')
+		return (9);
 	return (0);
 }
 
