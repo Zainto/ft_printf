@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/19 02:57:02 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/19 22:55:32 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,20 @@ LPATH =libft/
 LIPATH =libft/includes/
 
 INCS = ft_printf.h
+
 SRCS += ft_printf.c
 SRCS += format.c
 SRCS += extract.c
 SRCS += type.c
 SRCS += main.c
+SRCS += addr.c
+SRCS += string.c
+SRCS += digit.c
+SRCS += char.c
+SRCS += u_int.c
+SRCS += octal.c
+SRCS += binary.c
+SRCS += hexadecimal.c
 DSYM = $(NAME).dSYM
 
 OBJS = $(patsubst %.c, $(OPATH)%.o, $(SRCS))
@@ -67,7 +76,7 @@ debug : $(LIB) $(SRCS)
 $(NAME): $(LIB) $(OBJS) $(INCS)
 	$(CC) -o $@ $(LIB) $(OBJS)
 
-$(OBJS) : $(OPATH)%.o : %.c $(INCS) 
+$(OBJS) : $(OPATH)%.o : %.c $(INCS)
 	$(COMPILE) $(CFLAGS) $< -o $@
 
 $(LIB) :
@@ -76,7 +85,7 @@ $(LIB) :
 $(OPATH):
 	$(MKDIR) $@
 
-clean : 
+clean :
 	$(MAKE) -C $(LPATH) clean
 	$(CLEANUP) $(OBJS)
 	$(CLEANUP) $(OPATH)

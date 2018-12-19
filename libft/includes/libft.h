@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2018/12/19 11:19:39 by nrechati         ###   ########.fr       */
+/*   Created: 2018/12/19 21:55:01 by cempassi          #+#    #+#             */
+/*   Updated: 2018/12/19 23:16:06 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +35,10 @@ typedef struct		s_file{
 
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
+char				*ft_llitoa(long long n);
+char				*ft_ullitoa(unsigned long long int n);
+long long			ft_atoll_base(char *str, char *base);
+unsigned long long	ft_atoull_base(char *str, char *base);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 int					ft_isalpha(int c);

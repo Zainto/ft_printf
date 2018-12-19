@@ -78,6 +78,10 @@ SRCS +=ft_strrev.c
 #--------------------Conversion------------------#
 SRCS +=ft_atoi.c
 SRCS +=ft_itoa.c
+SRCS +=ft_ullitoa.c
+SRCS +=ft_llitoa.c
+SRCS +=ft_atoll_base.c
+SRCS +=ft_atoull_base.c
 SRCS +=ft_convert_base.c
 
 #----------------------Tab-----------------------#
