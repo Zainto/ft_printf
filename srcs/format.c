@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 02:51:29 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 03:14:03 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,6 @@ static t_list	*parser(char *spec, va_list args)
 	return (node);
 }
 
-static int		format_to_buffer(const char **format)
-{
-	int				result;
-	char			*tmp;
-	size_t			index;
-
-	index = ft_strcspn(*format, "%");
-	tmp = ft_strsub(*format, 0, index);
-	result = ft_ringbuffer(tmp);
-	ft_strdel(&tmp);
-	*format += index;
-	return (result);
-}
-
 t_list			*format_list(const char *format, va_list args)
 {
 	t_list			*lst;
@@ -89,20 +75,32 @@ t_list			*format_list(const char *format, va_list args)
 	return (lst);
 }
 
-int				format_output(const char *format, t_list *current, int result)
+static int		format_to_buffer(const char **format)
+{
+	int				result;
+	char			*tmp;
+	size_t			index;
+
+	index = ft_strcspn(*format, "%");
+	tmp = ft_strsub(*format, 0, index);
+	result = ft_ringbuffer(tmp);
+	ft_strdel(&tmp);
+	*format += index;
+	return (result);
+}
+
+int				output(const char *format, t_list *node)
 {
 	t_format		*tmp;
-	char			*convert;
+	char			*conv;
 
 	if (!*format)
-		return ((result += ft_ringbuffer(NULL)));
+		return (ft_ringbuffer(NULL));
 	if (*format == '%')
 	{
-		tmp = (t_format *)(current->data);
-		convert = printformat(tmp);
-		result += ft_ringbuffer(convert);
-		format += tmp->diff;
-		return (format_output(format, current->next, result));
+		tmp = (t_format *)(node->data);
+		conv = printformat(tmp);
+		return (ft_ringbuffer(conv) + output(format + tmp->diff, node->next));
 	}
-	return (format_to_buffer(&format) + format_output(format, current, result));
+	return (format_to_buffer(&format) + output(format, node));
 }

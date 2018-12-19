@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 02:49:52 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 03:12:57 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_printf(const char * format, ...);
 int				ft_vprintf(const char *format, va_list args);
 
 t_list			*format_list(const char *format, va_list args);
-int				format_output(const char *format, t_list *current, int result);
+int				output(const char *format, t_list *current);
 char			*printformat(t_format *format);
 
 void			extract_flags(char **spec, t_format *format);
