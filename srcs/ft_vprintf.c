@@ -6,45 +6,20 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:24:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/18 16:05:04 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/18 19:41:20 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
-#include "libft.h"
 
-static int	format_to_buffer(char **format)
-{
-	return ();
-}
-int		ft_vprintf(const char *format, va_list args)
+int				ft_vprintf(const char *format, va_list args)
 {
 	int				result;
-	char			*tmp;
-	size_t			index;
+	t_list			*lst;
 
-	tmp = NULL;
-	index = 0;
 	result = 0;
-	if (args)
-		;
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			result += ft_ringbuffer("[replace]");
-			format++;
-		}
-		else
-		{
-			index = ft_strcspn(format, "%");
-			tmp = ft_strsub(format, 0, index);	
-			result += ft_ringbuffer(tmp);
-			ft_strdel(&tmp);
-			format += index;
-		}
-	}
-	ft_ringbuffer(NULL);
+	lst = format_list(format, args);
+	result = format_output(format, lst, 0);
 	return (result);
 }
