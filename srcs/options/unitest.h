@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:35:41 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 11:28:04 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 11:40:23 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ typedef struct	s_format
 void	printf_c(t_format *format);
 void	printf_s(t_format *format);
 void	printf_p(t_format *format);
+void	printf_d(t_format *format);
 
 #endif

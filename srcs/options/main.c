@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:41:01 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 11:27:42 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 11:40:15 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int 			main(int ac, char **av)
 		printf_s(&format);
 	else if (ret == 3)
 		printf_p(&format);
+	else if (ret == 4)
+		printf_d(&format);
 	else
 		printf("Unsupported Option ! Soon ;)\n");
 	if (format.output != NULL)
