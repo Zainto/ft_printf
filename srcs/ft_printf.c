@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:28:43 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 03:13:20 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:25:36 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int		ft_vprintf(const char *format, va_list args)
 {
 	t_list			*lst;
 
-	if (!(lst = format_list(format, args)))
-		return (-1);
+	lst = format_list(format, args);
 	return (output(format, lst));
 }
 
