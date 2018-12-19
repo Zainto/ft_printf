@@ -6,17 +6,26 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:28:43 by cempassi          #+#    #+#             */
-/*   Updated: 2018/11/30 16:18:36 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 03:13:20 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int		ft_printf(const char * format, ...)
+int		ft_vprintf(const char *format, va_list args)
 {
-	va_list		args;
-	int			result;
+	t_list			*lst;
+
+	if (!(lst = format_list(format, args)))
+		return (-1);
+	return (output(format, lst));
+}
+
+int		ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		result;
 
 	va_start(args, format);
 	result = ft_vprintf(format, args);
