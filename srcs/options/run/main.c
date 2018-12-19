@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:41:01 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 12:02:53 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:30:43 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,25 @@ static int 		fill_format(t_format *format, char **av)
 		format->p = av[2];
 	if (ret == 4)
 		format->d = atoi(av[2]);
+	if (ret == 5)
+		format->d = atoi(av[2]);
+	if (ret == 6)
+		format->u = atoi(av[2]);
+	if (ret == 7)
+		format->d = atoi(av[2]);
+	if (ret == 8)
+		format->d = atoi(av[2]);
 	return (ret);
 }
 
 static void		init_format(t_format *format)
 {
-
+	format->output = NULL;
 	format->c = 0;
 	format->str = NULL;
-	format->output = NULL;
+	format->d = 0;
+	format->p = NULL;
+	format->u = 0;
 }
 
 int 			main(int ac, char **av)
@@ -88,6 +98,14 @@ int 			main(int ac, char **av)
 		printf_p(&format);
 	else if (ret == 4)
 		printf_d(&format);
+	else if (ret == 5)
+		printf_o(&format);
+	else if (ret == 6)
+		printf_u(&format);
+	else if (ret == 7)
+		printf_x(&format);
+	else if (ret == 8)
+		printf_xc(&format);
 	else
 		printf("Unsupported Option ! Soon ;)\n");
 	if (format.output != NULL)

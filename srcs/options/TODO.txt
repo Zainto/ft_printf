@@ -6,7 +6,7 @@
 #    By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/19 11:41:20 by nrechati          #+#    #+#              #
-#    Updated: 2018/12/19 11:53:21 by nrechati         ###   ########.fr        #
+#    Updated: 2018/12/19 13:36:35 by nrechati         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@
 #- %p				☑ completed
 #- %d				☑ completed
 #- %i				☑ completed
+#- %o				☑ completed
+#- %u				☑ completed
+#- %x				☑ completed
+#- %X				☑ completed
 
-#- %o				☐ todo
-#- %u				☐ todo
-#- %x				☐ todo
-#- %X				☐ todo
 #- %f				☐ todo
 
 #- precision		☒ postponed
