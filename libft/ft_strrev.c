@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char.c                                             :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 16:36:59 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 09:48:37 by nrechati         ###   ########.fr       */
+/*   Created: 2018/11/09 16:07:03 by nrechati          #+#    #+#             */
+/*   Updated: 2018/11/09 16:07:04 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unitest.h"
+#include "libft.h"
 
-void	printf_c(t_format *format)
+char	*ft_strrev(char *str)
 {
-	printf("Doing Char conversion !\n");
-	format->output = ft_strdup(&format->c);
-	return ;
+	int a;
+	int b;
+
+	b = 0;
+	if (!str)
+		return (NULL);
+	while (str[b])
+	{
+		b++;
+	}
+	b--;
+	a = 0;
+	while (a < b)
+	{
+		str[a] ^= str[b];
+		str[b] ^= str[a];
+		str[a] ^= str[b];
+		a++;
+		b--;
+	}
+	return (str);
 }

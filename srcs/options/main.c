@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:41:01 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/18 17:34:46 by nrechati         ###   ########.fr       */
+/*   Updated: 2018/12/19 11:27:42 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,27 @@ static int 		get_opt_gettho(char **av)
 		return (1);
 	if (av[1][1] == 's')
 		return (2);
+	if (av[1][1] == 'p')
+		return (3);
+	if (av[1][1] == 'd' || av[1][1] == 'i')
+		return (4);
 	return (0);
 }
 
 static int 		fill_format(t_format *format, char **av)
 {
 	int 	ret = 0;
-	char 	*str;
 
 	if (!(ret = get_opt_gettho(av)))
 		return (0);
 	if (ret == 1)
 		format->c = av[2][0];
 	if (ret == 2)
-	{
-		str = ft_strdup(av[2]);
-		format->str = str;
-	}
+		format->str = av[2];
+	if (ret == 3)
+		format->p = av[2];
+	if (ret == 4)
+		format->d = atoi(av[2]);
 	return (ret);
 }
 
@@ -65,8 +69,16 @@ int 			main(int ac, char **av)
 		return (0);
 	}
 	if (ret == 1)
-		printf_c(format);
+		printf_c(&format);
+	else if (ret == 2)
+		printf_s(&format);
+	else if (ret == 2)
+		printf_s(&format);
+	else if (ret == 3)
+		printf_p(&format);
 	else
 		printf("Unsupported Option ! Soon ;)\n");
+	if (format.output != NULL)
+		printf("Output : %s\n", format.output);
 	return (0);
 }

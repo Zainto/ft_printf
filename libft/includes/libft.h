@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 12:34:49 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/18 00:18:41 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 11:19:39 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 size_t				ft_strlen(const char *s);
 char				*ft_strstr(const char *haystack, const char *needle);
+char				*ft_strrev(char *str);
 char				*ft_strnstr(const char *haystack, const char *needle,\
 					size_t len);
 
