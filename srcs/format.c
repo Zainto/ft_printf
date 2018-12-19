@@ -6,30 +6,12 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 00:57:22 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 01:21:13 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
-#include <stdio.h>
-
-void			format_init(t_format *format)
-{
-	format->id = 0;
-	format->type = 0;
-	format->flag_minus = 0;
-	format->flag_plus = 0;
-	format->flag_zero = 0;
-	format->flag_space = 0;
-	format->flag_hashtag = 0;
-	format->diff = 0;
-	format->width = 0;
-	format->precision = 0;
-	format->size = NULL;
-	format->output = NULL;
-	format->convert = NULL;
-}
 
 static int		format_to_buffer(const char **format)
 {
@@ -54,11 +36,26 @@ static void		format_convert(const char **format, t_list **lst, va_list args)
 	char		*spec;
 
 	spec = ft_strsub(*format, 0, ft_strcspn(*format, TYPE) + 1);
-	printf("spec = %s\n", spec);
 	node = parser(spec, args);
-	printf("diff = %d\n",((t_format *)(node->data))->diff); 
 	ft_lstaddback(lst, node);
 	*format += ((t_format *)(node->data))->diff;
+}
+
+void			format_init(t_format *format)
+{
+	format->id = 0;
+	format->type = 0;
+	format->flag_minus = 0;
+	format->flag_plus = 0;
+	format->flag_zero = 0;
+	format->flag_space = 0;
+	format->flag_hashtag = 0;
+	format->diff = 0;
+	format->width = 0;
+	format->precision = 0;
+	format->size = NULL;
+	format->output = NULL;
+	format->convert = NULL;
 }
 
 t_list			*format_list(const char *format, va_list args)
@@ -74,50 +71,6 @@ t_list			*format_list(const char *format, va_list args)
 			format += ft_strcspn(format, "%");
 	}
 	return (lst);
-}
-
-char			*printformat(t_format *format)
-{
-	char	*info;
-
-	info = ft_strnew(0);
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	if(format->flag_minus == 1)
-		info = ft_strinsert(&info, '-', ft_strlen(info));
-	if(format->flag_plus == 1)
-		info = ft_strinsert(&info, '+', ft_strlen(info));
-	if(format->flag_zero == 1)
-		info = ft_strinsert(&info, '0', ft_strlen(info));
-	if(format->flag_space == 1)
-		info = ft_strinsert(&info, ' ', ft_strlen(info));
-	if(format->flag_hashtag == 1)
-		info = ft_strinsert(&info, '#', ft_strlen(info));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, ft_itoa(format->width));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, ft_itoa(format->precision));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strjoin(info, format->size);
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	info = ft_strinsert(&info, '[', ft_strlen(info));
-	info = ft_strinsert(&info, format->type, ft_strlen(info));
-	info = ft_strinsert(&info, ']', ft_strlen(info));
-	if (format->type == 's')
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strjoin(info, format->arg.string);
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	if (format->type == 'c')
-	{
-		info = ft_strinsert(&info, '[', ft_strlen(info));
-		info = ft_strinsert(&info, format->arg.character, ft_strlen(info));
-		info = ft_strinsert(&info, ']', ft_strlen(info));
-	}
-	return (info);
 }
 
 int				format_output(const char *format, t_list *current, int result)

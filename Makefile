@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/18 22:48:29 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/19 01:18:40 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS += ft_vprintf.c
 SRCS += ft_printf.c
 SRCS += format.c
 SRCS += parser.c
+SRCS += type.c
 SRCS += main.c
 DSYM = $(NAME).dSYM
 
