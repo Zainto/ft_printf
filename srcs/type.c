@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 01:59:35 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:10:59 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	type_signed_integer(t_format *format, va_list args)
 		format->arg.s_short = format->arg.integer;
 	}
 	else if (ft_strequ(format->size , "l"))
-		format->arg.l_integer = va_arg(args,long int);	
+		format->arg.l_integer = va_arg(args, long int);	
 	else if (ft_strequ(format->size , "ll") || ft_strequ(format->size , "L"))
-		format->arg.ll_integer = va_arg(args,long long int);	
+		format->arg.ll_integer = va_arg(args, long long int);	
 }
 
 void	type_unsigned_integer(t_format *format, va_list args)
@@ -48,9 +48,9 @@ void	type_unsigned_integer(t_format *format, va_list args)
 		format->arg.u_short = format->arg.u_integer;
 	}
 	else if (ft_strequ(format->size , "l"))
-		format->arg.ul_integer = va_arg(args,unsigned long int);	
+		format->arg.ul_integer = va_arg(args, unsigned long int);	
 	else if (ft_strequ(format->size , "ll") || ft_strequ(format->size , "L"))
-		format->arg.ull_integer = va_arg(args,unsigned long long int);	
+		format->arg.ull_integer = va_arg(args, unsigned long long int);	
 }
 
 void	type_float(t_format *format, va_list args)

@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 02:08:27 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:15:07 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ int		main(void)
 	a = 98;
 	b = 40;
 	printf("Salut %X\n", -4033);
-	ft_printf("Salut %c mais %lld %s", a, b, "Esperons que tout se passe bien");
+	ft_printf("Salut %c mais %lld %Ls", a, b, "Esperons que tout se passe bien");
 	return (0);
 }
