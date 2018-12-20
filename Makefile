@@ -6,12 +6,13 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/20 01:42:24 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/20 15:23:50 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf
 LIB = $(LPATH)libft.a
+LIBDB = $(LPATH)libftdb.a
 
 CC = Clang
 COMPILE = $(CC) -c
@@ -70,11 +71,18 @@ SRCS += pointer.c
 DSYM = $(NAME).dSYM
 
 OBJS = $(patsubst %.c, $(OPATH)%.o, $(SRCS))
+OBJDB = $(patsubst %.c, $(OPATH)%db.o, $(SRCS))
 
 all : $(LIB) $(OPATH) $(NAME)
 
-debug : $(LIB) $(SRCS)
-	$(DEBUG) $(DFLAGS) $(CFLAGS) -o $(NAME) $< $^
+debug : $(OPATH) $(LIBDB) $(OBJDB) $(INCS)
+	$(DEBUG) -o $(NAME) $(LIBDB) $(OBJDB)
+
+$(LIBDB):
+	$(MAKE) -C libft/ debug
+
+$(OBJDB): $(OPATH)%db.o : %.c $(INCS)
+	$(DEBUG) -c $(CFLAGS) $< -o $@
 
 $(NAME): $(LIB) $(OBJS) $(INCS)
 	$(CC) -o $@ $(LIB) $(OBJS)
@@ -91,6 +99,7 @@ $(OPATH):
 clean :
 	$(MAKE) -C $(LPATH) clean
 	$(CLEANUP) $(OBJS)
+	$(CLEANUP) $(OBJDB)
 	$(CLEANUP) $(OPATH)
 	$(CLEANUP) $(DSYM)
 

@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 02:49:18 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:37:15 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int				ft_vdprintf(const char *format, va_list args, int fd);
 int				ft_vasprintf(char **dst, const char *format, va_list args);
 
 t_list			*format_list(const char *format, va_list args);
+void			format_delete(void **data);
 int				doutput(const char *format, t_list *node, int fd);
 int				soutput(char **dst, const char *fmt, t_list *node);
 
