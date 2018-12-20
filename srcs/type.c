@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:29:32 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:58:47 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	type_other(t_format *format, va_list args)
 	{
 		format->arg.integer = va_arg(args, int);
 		format->arg.character = format->arg.integer;
+		format->convert = character;
+	}
+	if (format->type == '%')
+	{
+		format->arg.character = '%';
 		format->convert = character;
 	}
 	if (format->type == 's')

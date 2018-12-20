@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 16:44:18 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:00:09 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_list	*parser(char *spec, va_list args)
 		extract_precision(&spec, &format, args);
 	if (ft_strchr(SIZE, *spec))
 		extract_size(&spec, &format);
-	if (ft_strchr(TYPE, *spec))
+	if (ft_strchr(TYPE, *spec) || *spec == '%')
 		extract_type(&spec, &format, args);
 	node = ft_lstnew(&format, sizeof(t_format));
 	return (node);
@@ -99,15 +99,8 @@ int				output(const char *format, t_list *node)
 	if (*format == '%')
 	{
 		tmp = (t_format *)(node->data);
-		if(tmp->convert)
-		{
-			tmp->convert(tmp);
-			conv = tmp->output;
-		}
-		else
-		{
-			conv = "[not supported]";
-		}
+		tmp->convert(tmp);
+		conv = tmp->output;
 		return (ft_ringbuffer(conv) + output(format + tmp->diff, node->next));
 	}
 	return (format_to_buffer(&format) + output(format, node));
