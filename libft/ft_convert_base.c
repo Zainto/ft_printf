@@ -6,7 +6,7 @@
 /*   By: cempassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 20:44:15 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 21:54:03 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 02:21:18 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void			u_conv(unsigned long long nb, char *base, int id, char *buf)
 
 char				*convert_sign(char *nbr, char *base_from, char *base_to)
 {
-	char		buffer[34];
+	char		buffer[BASE_MAX];
 	char		*conv_res;
 	long long	base_ten;
 	int			buff_len;
@@ -75,7 +75,7 @@ char				*convert_sign(char *nbr, char *base_from, char *base_to)
 
 char				*convert_unsign(char *nbr, char *base_from, char *base_to)
 {
-	char				buffer[34];
+	char				buffer[BASE_MAX];
 	char				*conv_res;
 	unsigned long long	base_ten;
 	int					buff_len;

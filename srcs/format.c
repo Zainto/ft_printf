@@ -6,11 +6,10 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 01:18:07 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:41:17 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 
 static void		format_init(t_format *format)
@@ -73,35 +72,4 @@ t_list			*format_list(const char *format, va_list args)
 			format += ft_strcspn(format, "%");
 	}
 	return (lst);
-}
-
-static int		format_to_buffer(const char **format, int fd)
-{
-	int				result;
-	char			*tmp;
-	size_t			index;
-
-	index = ft_strcspn(*format, "%");
-	tmp = ft_strsub(*format, 0, index);
-	result = ft_ringbuffer(tmp, fd);
-	ft_strdel(&tmp);
-	*format += index;
-	return (result);
-}
-
-int				output(const char *fmt, t_list *node, int fd)
-{
-	t_format		*tmp;
-	char			*s;
-
-	if (!*fmt)
-		return (ft_ringbuffer(NULL, fd));
-	if (*fmt == '%')
-	{
-		tmp = (t_format *)(node->data);
-		tmp->convert(tmp);
-		s = tmp->output;
-		return (ft_ringbuffer(s, fd) + output(fmt + tmp->diff, node->next, fd));
-	}
-	return (format_to_buffer(&fmt, fd) + output(fmt, node, fd));
 }

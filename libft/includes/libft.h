@@ -6,13 +6,14 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 21:55:01 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 01:17:17 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 02:20:52 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 4096
+# define BASE_MAX 66
 # include <string.h>
 
 typedef struct		s_list{

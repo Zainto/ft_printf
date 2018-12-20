@@ -6,14 +6,13 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:58:47 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 03:05:43 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 
-void	type_signed_integer(t_format *format, va_list args)
+void				type_signed_integer(t_format *format, va_list args)
 {
 	if (format->size == NULL)
 		format->arg.integer = va_arg(args, int);
@@ -34,7 +33,7 @@ void	type_signed_integer(t_format *format, va_list args)
 	format->convert = digit;
 }
 
-t_convert	 unsigned_convert(t_format *format)
+static t_convert	unsigned_convert(t_format *format)
 {
 	if (format->type == 'b')
 		return (binary);
@@ -46,7 +45,7 @@ t_convert	 unsigned_convert(t_format *format)
 		return (u_integer);
 }
 
-void	type_unsigned_integer(t_format *format, va_list args)
+void				type_unsigned_integer(t_format *format, va_list args)
 {
 	if (format->size == NULL)
 		format->arg.u_integer = va_arg(args, int);
@@ -67,7 +66,7 @@ void	type_unsigned_integer(t_format *format, va_list args)
 	format->convert = unsigned_convert(format);
 }
 
-void	type_float(t_format *format, va_list args)
+void				type_float(t_format *format, va_list args)
 {
 	if (format->size == NULL)
 		format->arg.s_double = va_arg(args, double);
@@ -78,7 +77,7 @@ void	type_float(t_format *format, va_list args)
 	format->convert = doubles;
 }
 
-void	type_other(t_format *format, va_list args)
+void				type_other(t_format *format, va_list args)
 {
 	if (format->type == 'c')
 	{

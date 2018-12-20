@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:47:42 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 02:59:36 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ int		main(void)
 {
 	char	a;
 	char	*str;
+	char	*tmp;
+	char	*tmp2;
 	float	num;
 	int 	b;
-	int		r_printf;
 	int		r_ftprintf;
 
 
 	num = 45.4563879;
-	str = "Salut, comment ca va?";
 	b = 5000;
 	a = 'Z';
-	r_printf = printf("%100.3s mon ami\n", str);
-	r_ftprintf = ft_printf("binary: %b %%\n", b);
-	printf("Result printf = %d | Result ft_printf = %d\n", r_printf, r_ftprintf);
+	str = NULL;
+	tmp = "marche parfaitement comme il faut";
+	tmp2 = "et ouais mon gars";
+	r_ftprintf = ft_printf("%s %s %s %s %llX\n","Salut", tmp2, "tout", tmp, 0x22FD);
+	ft_putstr(str);
 	return (0);
 }

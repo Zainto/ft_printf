@@ -6,11 +6,10 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:08:05 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:41:38 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 
 void		extract_flags(char **spec, t_format *format)
