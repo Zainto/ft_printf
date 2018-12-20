@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 01:00:09 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:18:07 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_list			*format_list(const char *format, va_list args)
 	return (lst);
 }
 
-static int		format_to_buffer(const char **format)
+static int		format_to_buffer(const char **format, int fd)
 {
 	int				result;
 	char			*tmp;
@@ -83,25 +83,25 @@ static int		format_to_buffer(const char **format)
 
 	index = ft_strcspn(*format, "%");
 	tmp = ft_strsub(*format, 0, index);
-	result = ft_ringbuffer(tmp);
+	result = ft_ringbuffer(tmp, fd);
 	ft_strdel(&tmp);
 	*format += index;
 	return (result);
 }
 
-int				output(const char *format, t_list *node)
+int				output(const char *fmt, t_list *node, int fd)
 {
 	t_format		*tmp;
-	char			*conv;
+	char			*s;
 
-	if (!*format)
-		return (ft_ringbuffer(NULL));
-	if (*format == '%')
+	if (!*fmt)
+		return (ft_ringbuffer(NULL, fd));
+	if (*fmt == '%')
 	{
 		tmp = (t_format *)(node->data);
 		tmp->convert(tmp);
-		conv = tmp->output;
-		return (ft_ringbuffer(conv) + output(format + tmp->diff, node->next));
+		s = tmp->output;
+		return (ft_ringbuffer(s, fd) + output(fmt + tmp->diff, node->next, fd));
 	}
-	return (format_to_buffer(&format) + output(format, node));
+	return (format_to_buffer(&fmt, fd) + output(fmt, node, fd));
 }

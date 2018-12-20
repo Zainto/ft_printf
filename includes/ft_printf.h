@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 00:49:59 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:16:38 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ struct s_format{
 };
 
 int				ft_printf(const char * format, ...);
-int				ft_vprintf(const char *format, va_list args);
+int				ft_dprintf(int fd, const char *format, ...);
+int				ft_vprintf_fd(const char *format, va_list args, int fd);
 
 t_list			*format_list(const char *format, va_list args);
-int				output(const char *format, t_list *current);
+int				output(const char *format, t_list *node, int fd);
 
 void			extract_flags(char **spec, t_format *format);
 void			extract_width(char **spec, t_format *format, va_list args);
