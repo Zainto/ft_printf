@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:40:24 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/20 03:06:46 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 18:16:20 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ void			u_integer(t_format *format)
 {
 	char *tmp;
 
+	tmp = NULL;
 	if (ft_strequ(format->size, "l"))
-		tmp = ft_ullitoa(format->arg.l_integer);
+		format->output = ft_ullitoa(format->arg.ul_integer);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
-		tmp = ft_ullitoa(format->arg.ll_integer);
+		format->output = ft_ullitoa(format->arg.ull_integer);
 	else
-		tmp = ft_ullitoa(format->arg.integer);
-	format->output = tmp;
-	ft_strdel(&tmp);
+		format->output = ft_ullitoa(format->arg.u_integer);
 	return ;
 }

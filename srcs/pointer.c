@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 10:19:59 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 23:46:46 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:46:39 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,36 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-void			pointer(t_format *format)
+static char		*converter(t_format *format)
 {
 	char		*tmp;
 	char		*dst;
 
 	tmp = ft_ullitoa((uintptr_t)format->arg.pointer);
 	dst = ft_convert_base(tmp, TEN, HEXA);
-	format->output = ft_strjoin("0x", dst);
 	ft_strdel(&tmp);
+	tmp = ft_strjoin("0x", dst);
 	ft_strdel(&dst);
+	return (tmp);
+}
+void			pointer(t_format *format)
+{
+	char		*tmp;
+	char		*width;
+
+	tmp = converter(format);
+	format->width = format->width - ft_strlen(tmp);
+	width = NULL;
+	if (format->width > 0)
+	{
+		width = ft_strnew(format->width);
+		ft_memset(width, ' ', format->width);
+	}
+	if (format->flag_minus)
+		format->output = ft_strjoin(tmp, width);	
+	else
+		format->output = ft_strjoin(width, tmp);	
+	ft_strdel(&tmp);
+	ft_strdel(&width);
 	return ;
 }

@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/20 15:23:50 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/20 17:59:47 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,9 @@ OBJDB = $(patsubst %.c, $(OPATH)%db.o, $(SRCS))
 
 all : $(LIB) $(OPATH) $(NAME)
 
+run : all
+	./$(NAME)
+
 debug : $(OPATH) $(LIBDB) $(OBJDB) $(INCS)
 	$(DEBUG) -o $(NAME) $(LIBDB) $(OBJDB)
 
@@ -86,6 +89,7 @@ $(OBJDB): $(OPATH)%db.o : %.c $(INCS)
 
 $(NAME): $(LIB) $(OBJS) $(INCS)
 	$(CC) -o $@ $(LIB) $(OBJS)
+	@printf "$(GREEN)$@ is ready.\n$(NC)"
 
 $(OBJS) : $(OPATH)%.o : %.c $(INCS)
 	$(COMPILE) $(CFLAGS) $< -o $@
@@ -111,3 +115,4 @@ fclean : clean
 re: fclean all
 
 .PHONY: all clean fclean re debug
+.SILENT:

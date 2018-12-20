@@ -6,13 +6,13 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 23:16:45 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 20:06:08 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	digit(t_format *format)
+static char		*convert(t_format *format)
 {
 	char *tmp;
 
@@ -22,7 +22,16 @@ void	digit(t_format *format)
 		tmp = ft_llitoa(format->arg.ll_integer);
 	else
 		tmp = ft_itoa(format->arg.integer);
+	return (tmp);
+}
+
+void	digit(t_format *format)
+{
+	char	*tmp;
+
+	tmp = convert(format);
+	if (format->flag_plus && ft_isdigit(*tmp))
+		tmp = ft_strinsert(&tmp, '+', 0);
 	format->output = tmp;
-	ft_strdel(&tmp);
 	return ;
 }

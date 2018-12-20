@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 03:05:43 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/20 18:08:30 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void				type_signed_integer(t_format *format, va_list args)
 {
+	if (format->precision == 0)
+		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.integer = va_arg(args, int);
 	else if (ft_strequ(format->size, "hh"))
@@ -47,6 +49,8 @@ static t_convert	unsigned_convert(t_format *format)
 
 void				type_unsigned_integer(t_format *format, va_list args)
 {
+	if (format->precision == 0)
+		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.u_integer = va_arg(args, int);
 	else if (ft_strequ(format->size, "hh"))
@@ -79,20 +83,19 @@ void				type_float(t_format *format, va_list args)
 
 void				type_other(t_format *format, va_list args)
 {
-	if (format->type == 'c')
+	if (format->type == 'c' || format->type == '%')
 	{
-		format->arg.integer = va_arg(args, int);
+		
+		format->arg.integer = format->type == 'c' ? va_arg(args, int) : '%';
 		format->arg.character = format->arg.integer;
-		format->convert = character;
-	}
-	if (format->type == '%')
-	{
-		format->arg.character = '%';
 		format->convert = character;
 	}
 	if (format->type == 's')
 	{
-		format->arg.string = ft_strdup(va_arg(args, char *));
+		if ((format->arg.string = va_arg(args, char *)))
+			format->arg.string = ft_strdup(format->arg.string);
+		else
+			format->arg.string = ft_strdup("(null)");
 		format->convert = string;
 	}
 	if (format->type == 'p')
