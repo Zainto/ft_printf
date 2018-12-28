@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 18:08:30 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/28 17:29:56 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void				type_signed_integer(t_format *format, va_list args)
 	format->convert = digit;
 }
 
-static t_convert	unsigned_convert(t_format *format)
+static t_convert	unsigned_converter(t_format *format)
 {
 	if (format->type == 'b')
 		return (binary);
@@ -67,7 +67,7 @@ void				type_unsigned_integer(t_format *format, va_list args)
 		format->arg.ul_integer = va_arg(args, unsigned long int);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ull_integer = va_arg(args, unsigned long long int);
-	format->convert = unsigned_convert(format);
+	format->convert = unsigned_converter(format);
 }
 
 void				type_float(t_format *format, va_list args)

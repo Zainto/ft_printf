@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/20 17:59:47 by cempassi         ###   ########.fr        #
+#    Updated: 2018/12/28 17:10:08 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS += ft_printf.c
 SRCS += format.c
 SRCS += extract.c
 SRCS += type.c
+SRCS += widthprec.c
 SRCS += output.c
 SRCS += char.c
 SRCS += digit.c
@@ -114,5 +115,5 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug run
 .SILENT:

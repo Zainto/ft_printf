@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:26:03 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 22:59:13 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/28 17:30:45 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 void	hexadecimal(t_format *format)
 {
-	char	*dst;
 	char	*tmp;
+	char	*holder;
+	int		len;
 	int		i;
 
 	i = 0;
-	if (ft_strequ(format->size, "l"))
-		tmp = ft_ullitoa(format->arg.ul_integer);
-	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
-		tmp = ft_ullitoa(format->arg.ull_integer);
-	else
-		tmp = ft_ullitoa(format->arg.u_integer);
-	dst = ft_convert_base(tmp, TEN, HEXA);
+	tmp = unsigned_convert(format);
+	holder = tmp;
+	tmp = ft_convert_base(tmp, TEN, HEXA);
 	if (format->type == 'X')
 	{
-		while ((dst[i] = ft_toupper(dst[i])))
+		while ((tmp[i] = ft_toupper(tmp[i])))
 			i++;
 	}
-	ft_strdel(&tmp);
-	format->output = dst;
+	len = ft_strlen(tmp);
+	if ((format->precision -= len) > 0)
+		tmp = precision(format, tmp);
+	format->width = format->width - ft_strlen(tmp);
+	if (format->width > 0)
+		tmp = width(format, tmp);
+	ft_strdel (&holder);
+	format->output = tmp;
 	return ;
 }

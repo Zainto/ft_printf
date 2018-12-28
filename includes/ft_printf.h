@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 15:37:15 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/28 17:27:58 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ void			type_unsigned_integer(t_format *format, va_list args);
 void			type_float(t_format *format, va_list args);
 void			type_other(t_format *format, va_list args);
 
+char			*precision(t_format *format, char *tmp);
+char			*width(t_format *format, char *tmp);
+char			*unsigned_convert(t_format *format);
+
 void			pointer(t_format *format);
 void			string(t_format *format);
 void			digit(t_format *format);
@@ -95,4 +99,5 @@ void			binary(t_format *format);
 void			octal(t_format *format);
 void			hexadecimal(t_format *format);
 void			doubles(t_format *format);
+
 #endif
