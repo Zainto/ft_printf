@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/29 04:59:44 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 05:20:28 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void			digit(t_format *format)
 	len = ft_strlen(tmp);
 	if ((format->precision -= len) > 0)
 		tmp = precision(format, tmp);
-	format->width = format->width - ft_strlen(tmp);
-	format->width -= format->flag_plus && format->flag_minus ? 1 : 0;
+	format->width = format->width - len;
+	if (format->flag_plus && (format->flag_minus || *tmp == '0'))
+		format->width -= 1;
 	if (format->width > 0)
 		tmp = width(format, tmp);
 	if (format->flag_plus || flag == '-')
