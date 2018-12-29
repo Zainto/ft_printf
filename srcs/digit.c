@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/28 17:11:05 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 04:59:44 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,28 @@ static char		*convert(t_format *format, char *flag)
 		format->arg.integer *= *flag == '-' ? -1 : 1;
 		tmp = ft_itoa(format->arg.integer);
 	}
+	if (*tmp == '0' && format->precision == 0)
+		*tmp = '\0';
 	return (tmp);
 }
 
-void	digit(t_format *format)
+static char		*sign(t_format *format, char *tmp, char flag)
+{
+	int		i;
+
+	i = 0;
+	while (tmp[i] == ' ' && tmp[i + 1] == ' ')
+		i++;
+	if (tmp[i] == ' ')
+		tmp[i] = flag;
+	else if (tmp[i] == '0' && format->precision < 0)
+		tmp[i] = flag;
+	else
+		tmp = ft_strinsert(&tmp, flag, 0);
+	return (tmp);
+}
+
+void			digit(t_format *format)
 {
 	char	*tmp;
 	char	flag;
@@ -48,11 +66,12 @@ void	digit(t_format *format)
 	len = ft_strlen(tmp);
 	if ((format->precision -= len) > 0)
 		tmp = precision(format, tmp);
-	if ((format->flag_plus && ft_isdigit(*tmp)) || flag == '-')
-		tmp = ft_strinsert(&tmp, flag, 0);
 	format->width = format->width - ft_strlen(tmp);
+	format->width -= format->flag_plus && format->flag_minus ? 1 : 0;
 	if (format->width > 0)
 		tmp = width(format, tmp);
+	if (format->flag_plus || flag == '-')
+		tmp = sign(format, tmp, flag);
 	format->output = tmp;
 	return ;
 }

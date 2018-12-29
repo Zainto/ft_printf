@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 09:45:19 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/20 17:34:32 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:16:00 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	string(t_format *format)
 	char	*tmp;
 	char	*width;
 
-	if (format->precision)
-		tmp = ft_strsub(format->arg.string, 0, format->precision);
-	else
+	if (format->precision == -1)
 		tmp = ft_strdup(format->arg.string);
+	else
+		tmp = ft_strsub(format->arg.string, 0, format->precision);
 	format->width = format->width - ft_strlen(tmp);
 	width = NULL;
 	if (format->width > 0)

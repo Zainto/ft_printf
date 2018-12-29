@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:26:03 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/28 17:30:45 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:41:50 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	hexadecimal(t_format *format)
 
 	i = 0;
 	tmp = unsigned_convert(format);
-	holder = tmp;
-	tmp = ft_convert_base(tmp, TEN, HEXA);
+	tmp = *(holder = tmp) ? ft_convert_base(tmp, TEN, HEXA) : tmp;
 	if (format->type == 'X')
 	{
 		while ((tmp[i] = ft_toupper(tmp[i])))
@@ -34,7 +33,8 @@ void	hexadecimal(t_format *format)
 	format->width = format->width - ft_strlen(tmp);
 	if (format->width > 0)
 		tmp = width(format, tmp);
-	ft_strdel (&holder);
+	if (*holder)
+		ft_strdel (&holder);
 	format->output = tmp;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/28 17:29:56 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:23:25 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void				type_signed_integer(t_format *format, va_list args)
 {
-	if (format->precision == 0)
+	if (format->precision == -1)
 		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.integer = va_arg(args, int);
@@ -49,7 +49,7 @@ static t_convert	unsigned_converter(t_format *format)
 
 void				type_unsigned_integer(t_format *format, va_list args)
 {
-	if (format->precision == 0)
+	if (format->precision == -1)
 		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.u_integer = va_arg(args, int);

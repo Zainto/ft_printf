@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 17:08:00 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/28 17:28:40 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:32:23 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ char		*width(t_format *format, char *tmp)
 
 	holder = tmp;
 	width = ft_strnew(format->width);
-	ft_memset(width, ' ', format->width);
+	if (format->flag_zero && !format->flag_minus)
+		ft_memset(width, '0', format->width);
+	else
+		ft_memset(width, ' ', format->width);
 	if (format->flag_minus)
 		tmp = ft_strjoin(tmp, width);	
 	else
@@ -53,5 +56,7 @@ char		*unsigned_convert(t_format *format)
 		tmp = ft_ullitoa(format->arg.ull_integer);
 	else
 		tmp = ft_ullitoa(format->arg.u_integer);
+	if (*tmp == '0' && format->precision == 0)
+		*tmp = '\0';
 	return (tmp);
 }

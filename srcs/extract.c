@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/20 01:41:38 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:18:57 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		extract_flags(char **spec, t_format *format)
 		format->flag_minus = 1;
 	if (**spec == '+')
 		format->flag_plus = 1;
-	if (**spec == '0')
+	if (**spec == '0' && !ft_strchr(*spec, '.'))
 		format->flag_zero = 1;
 	if (**spec == ' ')
 		format->flag_space = 1;
@@ -65,7 +65,7 @@ void		extract_precision(char **spec, t_format *format, va_list args)
 		format->diff++;
 		*spec += 1;
 	}
-	else if (ft_isdigit(**spec))
+	else
 	{
 		format->precision = ft_atoi(*spec);
 		while (ft_isdigit(**spec))
