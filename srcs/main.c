@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/29 06:31:26 by cempassi         ###   ########.fr       */
+/*   Updated: 2018/12/29 06:32:45 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		main(void)
 	str = "Salut %d";
 	tmp = "ok";
 	//printf("%+100d %p\n", b, &a);
-	r_ftprintf = ft_printf("% 05.2d|\n", b);
-	r_printf = printf("% 05.2d|\n", b);
+	r_ftprintf = ft_printf("% 05.2i|\n", b);
+	r_printf = printf("% 05.2i|\n", b);
 	printf("Resultat ft_printf = %d | Resultat printf = %d\n", r_ftprintf, r_printf);
 	return (0);
 }
