@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 22:11:53 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/29 03:45:12 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/03 23:58:43 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	binary(t_format *format)
 	int		len;
 
 	tmp = unsigned_convert(format);
-	tmp = *(holder = tmp) ? ft_convert_base(tmp, TEN, HEXA) : tmp;
+	holder = tmp;
+	tmp = *holder ? ft_convert_base(tmp, TEN, HEXA) : tmp;
 	if (*holder)
-		ft_strdel (&holder);
+		ft_strdel(&holder);
 	len = ft_strlen(tmp);
 	if ((format->precision -= len) > 0)
 		tmp = precision(format, tmp);
@@ -29,7 +30,7 @@ void	binary(t_format *format)
 	{
 		holder = tmp;
 		tmp = ft_strjoin("0b", tmp);
-		ft_strdel (&holder);
+		ft_strdel(&holder);
 	}
 	format->width = format->width - ft_strlen(tmp);
 	if (format->width > 0)

@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:26:03 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/29 03:41:50 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:02:37 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,24 @@ void	hexadecimal(t_format *format)
 {
 	char	*tmp;
 	char	*holder;
-	int		len;
 	int		i;
 
-	i = 0;
 	tmp = unsigned_convert(format);
-	tmp = *(holder = tmp) ? ft_convert_base(tmp, TEN, HEXA) : tmp;
-	if (format->type == 'X')
-	{
-		while ((tmp[i] = ft_toupper(tmp[i])))
-			i++;
-	}
-	len = ft_strlen(tmp);
-	if ((format->precision -= len) > 0)
+	holder = tmp;
+	tmp = *holder ? ft_convert_base(tmp, TEN, HEXA) : tmp;
+	if ((format->precision -= ft_strlen(tmp)) > 0)
 		tmp = precision(format, tmp);
 	format->width = format->width - ft_strlen(tmp);
+	format->width -= format->flag_hashtag && format->flag_zero ? 2 : 0;
 	if (format->width > 0)
 		tmp = width(format, tmp);
+	if (format->flag_hashtag && *tmp)
+		tmp = prefix(format, tmp);
+	if (format->type == 'X' && !(i = 0))
+		while ((tmp[i] = ft_toupper(tmp[i])))
+			i++;
 	if (*holder)
-		ft_strdel (&holder);
+		ft_strdel(&holder);
 	format->output = tmp;
 	return ;
 }

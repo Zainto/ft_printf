@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/29 03:18:57 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/03 22:01:43 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,22 @@ void		extract_type(char **spec, t_format *format, va_list args)
 	if (ft_strchr(OTHER, format->type))
 		type_other(format, args);
 	else if (ft_strchr(SIGNED, format->type))
+	{
+		if (format->precision == -1)
+			format->precision = 1;
 		type_signed_integer(format, args);
+	}
 	else if (ft_strchr(UNSIGNED, format->type))
+	{
+		if (format->precision == -1)
+			format->precision = 1;
 		type_unsigned_integer(format, args);
+		if (format->flag_hashtag && !format->arg.u_character)
+		{
+			format->flag_hashtag = 0;
+			format->precision += format->type == 'o' ? 1 : 0;
+		}
+	}
 	else if (ft_strchr(FLOAT, format->type))
 		type_float(format, args);
 }

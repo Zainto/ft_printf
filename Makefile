@@ -6,13 +6,14 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2018/12/29 03:00:45 by cempassi         ###   ########.fr        #
+#    Updated: 2019/01/04 00:26:07 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
 LIB = $(LPATH)libft.a
 LIBDB = $(LPATH)libftdb.a
+EXEC = ft_printf
 
 CC = Clang
 COMPILE = $(CC) -c
@@ -52,7 +53,7 @@ LIPATH =libft/includes/
 
 INCS = ft_printf.h
 
-SRCS += main.c
+SRCM = main.c
 SRCS += ft_printf.c
 SRCS += format.c
 SRCS += extract.c
@@ -77,7 +78,9 @@ OBJDB = $(patsubst %.c, $(OPATH)%db.o, $(SRCS))
 all : $(LIB) $(OPATH) $(NAME)
 
 run : all
-	./$(NAME)
+	$(COMPILE) $(CFLAGS) srcs/$(SRCM) -o $(OPATH)main.o
+	$(CC) -o $(EXEC) $(NAME) $(OPATH)main.o
+	./$(EXEC)
 
 debug : $(OPATH) $(LIBDB) $(OBJDB) $(INCS)
 	$(DEBUG) -o $(NAME) $(LIBDB) $(OBJDB)
@@ -89,7 +92,7 @@ $(OBJDB): $(OPATH)%db.o : %.c $(INCS)
 	$(DEBUG) -c $(CFLAGS) $< -o $@
 
 $(NAME): $(LIB) $(OBJS) $(INCS)
-	$(CC) -o $@ $(LIB) $(OBJS)
+	ar -rus $@ $(OBJS) libft/objs/*.o
 	@printf "$(GREEN)$@ is ready.\n$(NC)"
 
 $(OBJS) : $(OPATH)%.o : %.c $(INCS)
@@ -112,8 +115,8 @@ fclean : clean
 	$(MAKE) -C $(LPATH) fclean
 	$(CLEANUP) $(OPATH)
 	$(CLEANUP) $(NAME)
+	$(CLEANUP) $(EXEC)
 
 re: fclean all
 
 .PHONY: all clean fclean re debug run
-.SILENT:

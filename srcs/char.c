@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:36:59 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/20 17:54:21 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/03 23:59:19 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	character(t_format *format)
 		ft_memset(width, ' ', format->width);
 	}
 	if (format->flag_minus)
-		format->output = ft_strjoin(tmp, width);	
+		format->output = ft_strjoin(tmp, width);
 	else
-		format->output = ft_strjoin(width, tmp);	
+		format->output = ft_strjoin(width, tmp);
 	ft_strdel(&tmp);
 	ft_strdel(&width);
 	return ;

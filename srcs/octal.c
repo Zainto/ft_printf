@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:47:35 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/29 03:43:48 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:19:10 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,15 @@ void	octal(t_format *format)
 	int		len;
 
 	tmp = unsigned_convert(format);
-	tmp = *(holder = tmp) ? ft_convert_base(tmp, TEN, HEXA) : tmp;
+	holder = tmp;
+	tmp = *holder ? ft_convert_base(tmp, TEN, OCTAL) : tmp;
 	if (*holder)
-		ft_strdel (&holder);
+		ft_strdel(&holder);
 	len = ft_strlen(tmp);
+	if (format->flag_hashtag)
+		format->precision = ft_strlen(tmp) + 1;
 	if ((format->precision -= len) > 0)
 		tmp = precision(format, tmp);
-	if (format->flag_hashtag && format->precision <= 0)
-	{
-		holder = tmp;
-		tmp = ft_strjoin("0", tmp);
-		ft_strdel (&holder);
-	}
 	format->width = format->width - ft_strlen(tmp);
 	if (format->width > 0)
 		tmp = width(format, tmp);

@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/29 03:23:25 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:06:44 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void				type_signed_integer(t_format *format, va_list args)
 {
-	if (format->precision == -1)
-		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.integer = va_arg(args, int);
+	else if (ft_strequ(format->size, "j"))
+		format->arg.intmax = va_arg(args, intmax_t);
 	else if (ft_strequ(format->size, "hh"))
 	{
 		format->arg.integer = va_arg(args, int);
@@ -28,10 +28,14 @@ void				type_signed_integer(t_format *format, va_list args)
 		format->arg.integer = va_arg(args, int);
 		format->arg.s_short = (short)format->arg.integer;
 	}
-	else if (ft_strequ(format->size, "l"))
+	else if (ft_strequ(format->size, "l") || format->type == 'D')
 		format->arg.l_integer = va_arg(args, long int);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ll_integer = va_arg(args, long long int);
+	else if (ft_strequ(format->size, "z") || ft_strequ(format->size, "I"))
+		format->arg.sizet = va_arg(args, size_t);
+	else if (ft_strequ(format->size, "t") || ft_strequ(format->size, "I"))
+		format->arg.ptrdiff = va_arg(args, ptrdiff_t);
 	format->convert = digit;
 }
 
@@ -49,8 +53,6 @@ static t_convert	unsigned_converter(t_format *format)
 
 void				type_unsigned_integer(t_format *format, va_list args)
 {
-	if (format->precision == -1)
-		format->precision = 1;
 	if (format->size == NULL)
 		format->arg.u_integer = va_arg(args, int);
 	else if (ft_strequ(format->size, "hh"))
@@ -63,10 +65,16 @@ void				type_unsigned_integer(t_format *format, va_list args)
 		format->arg.u_integer = va_arg(args, unsigned int);
 		format->arg.u_short = (unsigned short)format->arg.u_integer;
 	}
-	else if (ft_strequ(format->size, "l"))
+	else if (ft_strequ(format->size, "l") || format->type == 'U')
 		format->arg.ul_integer = va_arg(args, unsigned long int);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ull_integer = va_arg(args, unsigned long long int);
+	else if (ft_strequ(format->size, "j"))
+		format->arg.u_intmax = va_arg(args, uintmax_t);
+	else if (ft_strequ(format->size, "z") || ft_strequ(format->size, "I"))
+		format->arg.sizet = va_arg(args, size_t);
+	else if (ft_strequ(format->size, "t") || ft_strequ(format->size, "I"))
+		format->arg.ptrdiff = va_arg(args, ptrdiff_t);
 	format->convert = unsigned_converter(format);
 }
 
@@ -85,7 +93,6 @@ void				type_other(t_format *format, va_list args)
 {
 	if (format->type == 'c' || format->type == '%')
 	{
-		
 		format->arg.integer = format->type == 'c' ? va_arg(args, int) : '%';
 		format->arg.character = format->arg.integer;
 		format->convert = character;
