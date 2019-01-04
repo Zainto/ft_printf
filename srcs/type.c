@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:06:44 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:55:41 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void				type_signed_integer(t_format *format, va_list args)
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ll_integer = va_arg(args, long long int);
 	else if (ft_strequ(format->size, "z") || ft_strequ(format->size, "I"))
-		format->arg.sizet = va_arg(args, size_t);
+		format->arg.ssizet = va_arg(args, ssize_t);
 	else if (ft_strequ(format->size, "t") || ft_strequ(format->size, "I"))
 		format->arg.ptrdiff = va_arg(args, ptrdiff_t);
 	format->convert = digit;

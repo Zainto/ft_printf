@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/04 00:19:00 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:59:24 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char		*convert(t_format *format, char flag)
 	char	*tmp;
 
 	if (ft_strequ(format->size, "z"))
-		tmp = ft_ullitoa(format->arg.ll_integer);
+		tmp = ft_llitoa(format->arg.ssizet * (flag == '-' ? -1 : 1));
 	else if (ft_strequ(format->size, "hh"))
 		tmp = ft_llitoa(format->arg.character * (flag == '-' ? -1 : 1));
 	else if (ft_strequ(format->size, "h"))
@@ -74,7 +74,9 @@ static int		flag_create(t_format *format)
 		flag = '-';
 	else if (ft_strequ(format->size, "j") && format->arg.intmax < 0)
 		flag = '-';
-	else if (!ft_strequ(format->size, "z") && format->arg.integer < 0)
+	else if (ft_strequ(format->size, "z") && format->arg.ssizet < 0)
+		flag = '-';
+	else if (format->arg.integer < 0)
 		flag = '-';
 	if (format->flag_plus && flag == ' ')
 		flag = '+';

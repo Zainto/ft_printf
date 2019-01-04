@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:17:07 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/04 00:29:22 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef union			u_args{
 	long int			l_integer;
 	long long int		ll_integer;
 	intmax_t			intmax;
+	ssize_t				ssizet;
 	unsigned int		u_integer;
 	unsigned long		ul_integer;
 	unsigned long long	ull_integer;
