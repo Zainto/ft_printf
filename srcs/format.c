@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:56:04 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 21:29:32 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void		format_init(t_format *format)
 {
 	format->id = 0;
+	format->valid = 1;
 	format->type = 0;
 	format->flag_minus = 0;
 	format->flag_plus = 0;
@@ -35,18 +36,22 @@ static t_list	*parser(char *spec, va_list args)
 	t_list		*node;
 
 	format_init(&format);
-	spec++;
-	format.diff += 1;
-	if (ft_strchr(FLAGS, *spec))
-		extract_flags(&spec, &format);
-	if (ft_isdigit(*spec) || *spec == '*')
-		extract_width(&spec, &format, args);
-	if (*spec == '.')
-		extract_precision(&spec, &format, args);
-	if (ft_strchr(SIZE, *spec))
-		extract_size(&spec, &format);
-	if (ft_strchr(TYPE, *spec) || *spec == '%')
-		extract_type(&spec, &format, args);
+	if (spec)
+	{
+		spec++;
+		format.diff += 1;
+		if (ft_strchr(FLAGS, *spec))
+			extract_flags(&spec, &format);
+		if (ft_isdigit(*spec) || *spec == '*')
+			extract_width(&spec, &format, args);
+		if (*spec == '.')
+			extract_precision(&spec, &format, args);
+		if (ft_strchr(SIZE, *spec))
+			extract_size(&spec, &format);
+		format.valid = extract_type(&spec, &format, args);
+	}
+	else
+		format.valid = 0;
 	node = ft_lstnew(&format, sizeof(t_format));
 	return (node);
 }
@@ -76,6 +81,7 @@ t_list			*format_list(const char *format, va_list args)
 		{
 			spec = ft_strsub(format, 0, ft_strcspn(format, TYPE) + 1);
 			node = parser(spec, args);
+			((t_format *)(node->data))->id = (char)ft_lstlen(lst) + 1;
 			ft_lstaddback(&lst, node);
 			format += ((t_format *)(node->data))->diff;
 			ft_strdel(&spec);

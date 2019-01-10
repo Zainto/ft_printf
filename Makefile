@@ -6,7 +6,7 @@
 #    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2019/01/04 00:26:07 by cempassi         ###   ########.fr        #
+#    Updated: 2019/01/05 18:19:15 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,9 @@ WHITE=\033[0;37m
 MKDIR = mkdir -p
 CLEANUP = rm -rf
 
-WFLAGS += -Wall
-WFLAGS += -Werror
-WFLAGS += -Wextra
+#WFLAGS += -Wall
+#WFLAGS += -Werror
+#WFLAGS += -Wextra
 DFLAGS = -fsanitize=address
 IFLAGS = -I $(IPATH) -I $(LIPATH)
 CFLAGS = $(WFLAGS) $(IFLAGS)

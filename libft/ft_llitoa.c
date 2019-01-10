@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 23:13:38 by cempassi          #+#    #+#             */
-/*   Updated: 2018/12/19 23:24:43 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 19:02:34 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ char			*ft_llitoa(long long n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	flag = 0;
 	len = numlen(n);
-	buffer = ft_strnew(len);
-	if (n < 0)
-		buffer[flag++] = '-';
-	if (n == LLONG_MIN)
+	flag = n < 0 ? 1 : 0;
+	buffer = ft_strnew(len + flag);
+	if (flag)
+		*buffer = '-';
+	if (n == LONG_MIN)
 	{
-		n++;	
-		converter(buffer + flag, flag == 0 ? (long)n : -(long)n, len);
+		n++;
+		converter(buffer + flag, -n, len);
 		buffer[19] += 1;
 	}
 	else 

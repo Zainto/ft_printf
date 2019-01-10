@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:55:56 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 21:37:52 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,40 @@ void		extract_size(char **spec, t_format *format)
 	format->size = ft_strsub(*spec, 0, len);
 	format->diff += len;
 	*spec += len;
+	if(ft_strequ(format->size, "hh"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "h"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "l"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "ll"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "z"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "j"))
+		format->valid = 1;
+	else if(ft_strequ(format->size, "t"))
+		format->valid = 1;
+	else
+		format->valid = 0;
 }
 
-void		extract_type(char **spec, t_format *format, va_list args)
+int			extract_type(char **spec, t_format *format, va_list args)
 {
-	format->type = **spec;
+	format->type = ft_strchr(TYPE, **spec) || **spec == '%' ? **spec : 0;
+	if (!format->type)
+		return (0);
 	format->diff++;
 	if (ft_strchr(OTHER, format->type))
 		type_other(format, args);
 	else if (ft_strchr(SIGNED, format->type))
 	{
-		if (format->precision == -1)
-			format->precision = 1;
+		format->precision = format->precision == -1 ? 1 : format->precision;
 		type_signed_integer(format, args);
 	}
 	else if (ft_strchr(UNSIGNED, format->type))
 	{
-		if (format->precision == -1)
-			format->precision = 1;
+		format->precision = format->precision == -1 ? 1 : format->precision;
 		type_unsigned_integer(format, args);
 		if (format->flag_hashtag && !format->arg.u_character)
 		{
@@ -111,4 +127,5 @@ void		extract_type(char **spec, t_format *format, va_list args)
 	}
 	else if (ft_strchr(FLOAT, format->type))
 		type_float(format, args);
+	return (1);
 }

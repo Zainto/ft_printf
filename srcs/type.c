@@ -6,11 +6,12 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:55:41 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 19:38:47 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void				type_signed_integer(t_format *format, va_list args)
 {
@@ -53,7 +54,9 @@ static t_convert	unsigned_converter(t_format *format)
 
 void				type_unsigned_integer(t_format *format, va_list args)
 {
-	if (format->size == NULL)
+	if (ft_strequ(format->size, "l") || format->type == 'U')
+		format->arg.ul_integer = va_arg(args, unsigned long int);
+	else if (format->size == NULL)
 		format->arg.u_integer = va_arg(args, int);
 	else if (ft_strequ(format->size, "hh"))
 	{
@@ -65,8 +68,6 @@ void				type_unsigned_integer(t_format *format, va_list args)
 		format->arg.u_integer = va_arg(args, unsigned int);
 		format->arg.u_short = (unsigned short)format->arg.u_integer;
 	}
-	else if (ft_strequ(format->size, "l") || format->type == 'U')
-		format->arg.ul_integer = va_arg(args, unsigned long int);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ull_integer = va_arg(args, unsigned long long int);
 	else if (ft_strequ(format->size, "j"))

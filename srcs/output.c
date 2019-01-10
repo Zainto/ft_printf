@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 01:37:04 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:04:33 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 21:17:28 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,21 @@ static int		format_to_fd(const char **format, int fd)
 int				doutput(const char *fmt, t_list *node, int fd)
 {
 	t_format		*tmp;
-	char			*s;
 
 	if (!*fmt)
 		return (ft_ringbuffer(NULL, fd));
 	if (*fmt == '%')
 	{
 		tmp = (t_format *)(node->data);
-		tmp->convert(tmp);
-		s = tmp->output;
-		if (tmp->type == 'c' && tmp->arg.character == 0)
+		if(tmp->valid)
+			tmp->convert(tmp);
+		if (tmp->type == 'c' && tmp->arg.character == 0 && tmp->valid)
 		{
-			return (ft_ringbuffer(s, fd) + ft_ringbuffer(NULL, fd)
+			return (ft_ringbuffer(tmp->output, fd) + ft_ringbuffer(NULL, fd)
 					+ write(fd, "", 1)
 					+ doutput(fmt + tmp->diff, node->next, fd));
 		}
-		return (ft_ringbuffer(s, fd)
+		return (ft_ringbuffer(tmp->output, fd)
 				+ doutput(fmt + tmp->diff, node->next, fd));
 	}
 	return (format_to_fd(&fmt, fd) + doutput(fmt, node, fd));

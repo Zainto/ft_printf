@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:29:22 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 21:27:24 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SIZE "hlLIjzt"
 # define OTHER "csp%"
 # define SIGNED "di"
-# define UNSIGNED "bouxX"
+# define UNSIGNED "bouUxX"
 # define FLOAT "f"
 # define TYPE "cspdDibouUxXf"
 # define TEN "0123456789"
@@ -31,7 +31,8 @@
 typedef struct s_format	t_format;
 typedef void			(*t_convert)(t_format *);
 
-typedef union			u_args{
+typedef union			u_args
+{
 	char				character;
 	unsigned char		u_character;
 	short				s_short;
@@ -53,9 +54,10 @@ typedef union			u_args{
 	void				*pointer;
 }						t_args;
 
-struct					s_format{
-
+struct					s_format
+{
 	char				id;
+	char				valid;
 	char				type;
 	char				flag_minus;
 	char				flag_plus;
@@ -89,7 +91,7 @@ void					extract_width(char **spec, t_format *format,\
 						va_list args);
 void					extract_precision(char **spec, t_format *format,\
 						va_list args);
-void					extract_type(char **spec, t_format *format,\
+int						extract_type(char **spec, t_format *format,\
 						va_list args);
 
 void					type_signed_integer(t_format *format, va_list args);

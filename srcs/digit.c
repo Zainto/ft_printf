@@ -6,34 +6,25 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/04 00:59:24 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/05 19:26:14 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+#include <limits.h>
 
-static char		*convert(t_format *format, char flag)
+static char		*convert(t_format *format, long long value)
 {
 	char	*tmp;
 
-	if (ft_strequ(format->size, "z"))
-		tmp = ft_llitoa(format->arg.ssizet * (flag == '-' ? -1 : 1));
-	else if (ft_strequ(format->size, "hh"))
-		tmp = ft_llitoa(format->arg.character * (flag == '-' ? -1 : 1));
-	else if (ft_strequ(format->size, "h"))
-		tmp = ft_llitoa(format->arg.s_short * (flag == '-' ? -1 : 1));
-	else if (ft_strequ(format->size, "l") || format->type == 'D')
-		tmp = ft_llitoa(format->arg.l_integer * (flag == '-' ? -1 : 1));
-	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
-		tmp = ft_llitoa(format->arg.ll_integer * (flag == '-' ? -1 : 1));
-	else
-		tmp = ft_llitoa(format->arg.integer * (flag == '-' ? -1 : 1));
+	tmp = ft_llitoa(value);
 	if (*tmp == '0' && format->precision == 0)
 		*tmp = '\0';
 	if (*tmp == '-')
 	{
 		format->output = tmp;
-		tmp = ft_strsub(tmp, 1, ft_strlen(tmp + 1));
+		tmp = ft_strsub(tmp, 1, ft_strlen(tmp));
 		ft_strdel(&format->output);
 	}
 	return (tmp);
@@ -55,41 +46,41 @@ static char		*sign(t_format *format, char *tmp, char flag)
 	return (tmp);
 }
 
-static int		flag_create(t_format *format)
+static long long	flag_create(t_format *format, char *flag)
 {
-	char	flag;
+	long long		value;
 
-	flag = ' ';
-	if (ft_strequ(format->size, "l") && format->arg.l_integer < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "hh") && format->arg.character < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "h") && format->arg.s_short < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "ll") && format->arg.l_integer < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "L") && format->arg.l_integer < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "t") && format->arg.ptrdiff < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "j") && format->arg.intmax < 0)
-		flag = '-';
-	else if (ft_strequ(format->size, "z") && format->arg.ssizet < 0)
-		flag = '-';
-	else if (format->arg.integer < 0)
-		flag = '-';
-	if (format->flag_plus && flag == ' ')
-		flag = '+';
-	return (flag);
+	value = 0;
+	if (ft_strequ(format->size, "hh"))
+		value = format->arg.character;
+	else if (ft_strequ(format->size, "h"))
+		value = format->arg.s_short;
+	else if (ft_strequ(format->size, "l"))
+		value = format->arg.l_integer;
+	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
+		value = format->arg.ll_integer;
+	else if (ft_strequ(format->size, "t"))
+		value = format->arg.ptrdiff;
+	else if (ft_strequ(format->size, "j"))
+		value = format->arg.intmax;
+	else if (ft_strequ(format->size, "z"))
+		value = format->arg.ssizet;
+	else
+		value = format->arg.integer;
+	if (format->flag_plus || value < 0)
+		*flag = value < 0 ? '-' : '+';
+	return (*flag == '-' && value != LONG_MIN ? -value: value);
 }
 
 void			digit(t_format *format)
 {
-	char	*tmp;
-	char	flag;
+	char			*tmp;
+	char			flag;
+	long long		value;
 
-	flag = flag_create(format);
-	tmp = convert(format, flag);
+	flag = ' ';
+	value = flag_create(format, &flag);
+	tmp = convert(format, value);
 	if ((format->precision -= ft_strlen(tmp)) > 0)
 		tmp = precision(format, tmp);
 	format->width = format->width - ft_strlen(tmp);
