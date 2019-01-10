@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:26:03 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/04 00:02:37 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:37:51 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	hexadecimal(t_format *format)
 	if ((format->precision -= ft_strlen(tmp)) > 0)
 		tmp = precision(format, tmp);
 	format->width = format->width - ft_strlen(tmp);
-	format->width -= format->flag_hashtag && format->flag_zero ? 2 : 0;
+	if (format->flag_hashtag && (format->flag_zero || format->flag_minus))
+		format->width -= 2;
 	if (format->width > 0)
 		tmp = width(format, tmp);
 	if (format->flag_hashtag && *tmp)

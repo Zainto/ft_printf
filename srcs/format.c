@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 21:29:32 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:18:21 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void		format_init(t_format *format)
 static t_list	*parser(char *spec, va_list args)
 {
 	t_format	format;
-	t_list		*node;
 
 	format_init(&format);
 	if (spec)
@@ -48,12 +47,13 @@ static t_list	*parser(char *spec, va_list args)
 			extract_precision(&spec, &format, args);
 		if (ft_strchr(SIZE, *spec))
 			extract_size(&spec, &format);
+		if (ft_strchr(FLAGS, *spec))
+			extract_flags(&spec, &format);
 		format.valid = extract_type(&spec, &format, args);
 	}
 	else
 		format.valid = 0;
-	node = ft_lstnew(&format, sizeof(t_format));
-	return (node);
+	return (ft_lstnew(&format, sizeof(t_format)));
 }
 
 void			format_delete(void **data)

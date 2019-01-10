@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 21:37:52 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:16:33 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@ void		extract_flags(char **spec, t_format *format)
 	if (!ft_strchr(FLAGS, **spec))
 		return ;
 	if (**spec == '-')
+	{
 		format->flag_minus = 1;
-	if (**spec == '+')
+		format->flag_zero = 0;
+	}
+	else if (**spec == '+')
+	{
 		format->flag_plus = 1;
-	if (**spec == '0' && !ft_strchr(*spec, '.'))
+		format->flag_space = 0;
+	}
+	else if (**spec == '0' && !ft_strchr(*spec, '.') && !format->flag_minus)
 		format->flag_zero = 1;
-	if (**spec == ' ')
+	else if (**spec == ' ' && !format->flag_plus)
 		format->flag_space = 1;
-	if (**spec == '#')
+	else if (**spec == '#')
 		format->flag_hashtag = 1;
 	format->diff++;
 	*spec += 1;
@@ -57,8 +63,11 @@ void		extract_width(char **spec, t_format *format, va_list args)
 
 void		extract_precision(char **spec, t_format *format, va_list args)
 {
-	*spec += 1;
-	format->diff++;
+	size_t		point;
+
+	point = ft_strspn(*spec, ".");
+	*spec += point;
+	format->diff += point;
 	if (**spec == '*')
 	{
 		format->precision = va_arg(args, int);
@@ -74,6 +83,9 @@ void		extract_precision(char **spec, t_format *format, va_list args)
 			format->diff++;
 		}
 	}
+	point = ft_strspn(*spec, ".");
+	*spec += point;
+	format->diff += point;
 }
 
 void		extract_size(char **spec, t_format *format)
