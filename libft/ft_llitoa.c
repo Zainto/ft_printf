@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_llitoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 23:13:38 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 19:02:34 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:26:47 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char			*ft_llitoa(long long n)
 		converter(buffer + flag, -n, len);
 		buffer[19] += 1;
 	}
-	else 
+	else
 		converter(buffer + flag, flag == 0 ? (long)n : -(long)n, len);
 	return (ft_strdup(buffer));
 }

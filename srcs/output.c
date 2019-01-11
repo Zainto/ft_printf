@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 01:37:04 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 21:17:28 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:22:05 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				doutput(const char *fmt, t_list *node, int fd)
 	if (*fmt == '%')
 	{
 		tmp = (t_format *)(node->data);
-		if(tmp->valid)
+		if (tmp->valid)
 			tmp->convert(tmp);
 		if (tmp->type == 'c' && tmp->arg.character == 0 && tmp->valid)
 		{

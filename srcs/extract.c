@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/10 11:16:33 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:20:58 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,19 @@ void		extract_size(char **spec, t_format *format)
 	format->size = ft_strsub(*spec, 0, len);
 	format->diff += len;
 	*spec += len;
-	if(ft_strequ(format->size, "hh"))
+	if (ft_strequ(format->size, "hh"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "h"))
+	else if (ft_strequ(format->size, "h"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "l"))
+	else if (ft_strequ(format->size, "l"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "ll"))
+	else if (ft_strequ(format->size, "ll"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "z"))
+	else if (ft_strequ(format->size, "z"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "j"))
+	else if (ft_strequ(format->size, "j"))
 		format->valid = 1;
-	else if(ft_strequ(format->size, "t"))
+	else if (ft_strequ(format->size, "t"))
 		format->valid = 1;
 	else
 		format->valid = 0;

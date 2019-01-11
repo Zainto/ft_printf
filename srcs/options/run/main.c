@@ -6,13 +6,13 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 16:41:01 by nrechati          #+#    #+#             */
-/*   Updated: 2018/12/19 13:45:29 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:25:02 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/unitest.h"
 
-static int 		get_opt_gettho(char **av)
+static int		get_opt_gettho(char **av)
 {
 	if (av[1][0] != '%')
 		return (0);
@@ -37,10 +37,11 @@ static int 		get_opt_gettho(char **av)
 	return (0);
 }
 
-static int 		fill_format(t_format *format, char **av)
+static int		fill_format(t_format *format, char **av)
 {
-	int 	ret = 0;
+	int		ret;
 
+	ret = 0;
 	if (!(ret = get_opt_gettho(av)))
 		return (0);
 	if (ret == 1)
@@ -74,14 +75,14 @@ static void		init_format(t_format *format)
 	format->u = 0;
 }
 
-int 			main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	int 		ret;
-	t_format 	format;
+	int			ret;
+	t_format	format;
 
-	if (ac!= 3)
+	if (ac != 3)
 	{
-		printf ("usage : ./printf %%[opt] [var]");
+		printf("usage : ./printf %%[opt] [var]");
 		return (0);
 	}
 	init_format(&format);

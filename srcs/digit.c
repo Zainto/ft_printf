@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/05 19:26:14 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:18:51 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-static char		*convert(t_format *format, long long value)
+static char			*convert(t_format *format, long long value)
 {
 	char	*tmp;
 
@@ -30,7 +30,7 @@ static char		*convert(t_format *format, long long value)
 	return (tmp);
 }
 
-static char		*sign(t_format *format, char *tmp, char flag)
+static char			*sign(t_format *format, char *tmp, char flag)
 {
 	int		i;
 
@@ -69,10 +69,10 @@ static long long	flag_create(t_format *format, char *flag)
 		value = format->arg.integer;
 	if (format->flag_plus || value < 0)
 		*flag = value < 0 ? '-' : '+';
-	return (*flag == '-' && value != LONG_MIN ? -value: value);
+	return (*flag == '-' && value != LONG_MIN ? -value : value);
 }
 
-void			digit(t_format *format)
+void				digit(t_format *format)
 {
 	char			*tmp;
 	char			flag;
