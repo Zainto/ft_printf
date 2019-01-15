@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 15:20:45 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 21:27:24 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/15 11:55:35 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ struct					s_format
 	char				type;
 	char				flag_minus;
 	char				flag_plus;
-	char				flag_zero;
+	char				flag_zero;     //les zeros
 	char				flag_space;
 	char				flag_hashtag;
-	int					width;
+	int					width;         //largeure
 	int					precision;
 	unsigned int		diff;
 	char				*size;

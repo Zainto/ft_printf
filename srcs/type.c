@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/05 19:38:47 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/15 11:47:07 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void				type_float(t_format *format, va_list args)
 		format->arg.s_double = va_arg(args, double);
 	if (ft_strequ(format->size, "l") || ft_strequ(format->size, "L"))
 		format->arg.l_double = va_arg(args, long double);
-	if (format->precision == 0)
+	if (format->precision == -1)
 		format->precision = 6;
 	format->convert = doubles;
 }

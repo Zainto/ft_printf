@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+         #
+#    By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2019/01/05 18:19:15 by cempassi         ###   ########.fr        #
+#    Updated: 2019/01/15 11:52:16 by nrechati         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,3 +120,4 @@ fclean : clean
 re: fclean all
 
 .PHONY: all clean fclean re debug run
+.SILENT :
