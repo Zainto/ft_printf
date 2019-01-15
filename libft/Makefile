@@ -42,6 +42,7 @@ SRCS +=ft_isalpha.c
 SRCS +=ft_isascii.c
 SRCS +=ft_isdigit.c
 SRCS +=ft_isprint.c
+SRCS +=ft_abs.c
 SRCS +=ft_strcat.c
 SRCS +=ft_strchr.c
 SRCS +=ft_strcmp.c
