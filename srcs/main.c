@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 03:54:37 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/15 12:55:46 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/15 13:51:26 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(void)
 	int		r_printf;
 	int		r_ftprintf;
 
-	num = -42.12345;
+	num = 42.12345;
 	r_ftprintf = ft_printf("Mine %20.4f|\n", num);
 	r_printf = printf("Real %20.4f|\n", num);
 	printf("Resultat ft_printf = %d | Resultat printf = %d\n", r_ftprintf, r_printf);
