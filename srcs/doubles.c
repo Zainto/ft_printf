@@ -6,12 +6,12 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:38:49 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/15 11:53:43 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:03:37 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 void	doubles(t_format *format)
 {
 	int		i;
@@ -35,6 +35,9 @@ void	doubles(t_format *format)
 	}
 	dst = ft_strdup(tmp);
 	ft_strdel(&tmp);
+	format->width = format->width - ft_strlen(dst);
+	if (format->width > 0)
+		dst = width(format, dst);
 	format->output = dst;
 	return ;
 }

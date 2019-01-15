@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   widthprec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 17:08:00 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/04 00:07:49 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:03:16 by nrechati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 char		*precision(t_format *format, char *tmp)
 {
 	char	*holder;
