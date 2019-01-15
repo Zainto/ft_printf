@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/15 13:44:42 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:19:22 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ void				digit(t_format *format)
 	value = flag_create(format, &flag);
 	tmp = convert(format, value);
 	if ((format->precision -= ft_strlen(tmp)) > 0)
+	{
+		format->flag_zero = 0;
 		tmp = precision(format, tmp);
+	}
 	format->width = format->width - ft_strlen(tmp);
 	if (format->flag_plus || format->flag_space || flag == '-')
 	{
-		if (format->flag_minus)
-			format->width -= 1;
-		else if (*tmp == '0' && format->precision < 0)
+		if (format->flag_minus || (*tmp == '0' && format->precision < 0))
 			format->width -= 1;
 	}
 	if (format->width > 0)

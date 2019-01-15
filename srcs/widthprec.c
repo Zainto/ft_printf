@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 17:08:00 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/15 12:03:16 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:14:16 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*width(t_format *format, char *tmp)
 
 	holder = tmp;
 	width = ft_strnew(format->width);
-	if (format->flag_zero && !format->flag_minus)
+	if (format->flag_zero)
 		ft_memset(width, '0', format->width);
 	else
 		ft_memset(width, ' ', format->width);

@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/11 12:20:58 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/15 14:51:47 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		extract_flags(char **spec, t_format *format)
 		format->flag_plus = 1;
 		format->flag_space = 0;
 	}
-	else if (**spec == '0' && !ft_strchr(*spec, '.') && !format->flag_minus)
+	else if (**spec == '0'  && !format->flag_minus)
 		format->flag_zero = 1;
 	else if (**spec == ' ' && !format->flag_plus)
 		format->flag_space = 1;
