@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 10:19:59 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/04 00:05:16 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:13:42 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ static char		*converter(t_format *format)
 	char		*tmp;
 	char		*dst;
 
-	tmp = ft_ullitoa((uintptr_t)format->arg.pointer);
-	dst = ft_convert_base(tmp, TEN, HEXA);
-	ft_strdel(&tmp);
+	if (format->precision == 0 && format->arg.pointer == NULL)
+		dst = NULL;
+	else
+	{
+		tmp = ft_ullitoa((uintptr_t)format->arg.pointer);
+		dst = ft_convert_base(tmp, TEN, HEXA);
+		ft_strdel(&tmp);
+	}
 	tmp = ft_strjoin("0x", dst);
 	ft_strdel(&dst);
 	return (tmp);

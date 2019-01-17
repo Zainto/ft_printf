@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 11:38:30 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/15 15:19:22 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:32:55 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,6 @@ static char			*convert(t_format *format, long long value)
 	return (tmp);
 }
 
-static char			*sign(t_format *format, char *tmp, char flag)
-{
-	int		i;
-
-	i = 0;
-	while (tmp[i] == ' ' && tmp[i + 1] == ' ')
-		i++;
-	if (tmp[i] == ' ')
-		tmp[i] = flag;
-	else if (tmp[i] == '0' && format->precision < 0)
-		tmp[i] = flag;
-	else
-		tmp = ft_strinsert(&tmp, flag, 0);
-	return (tmp);
-}
-
 static long long	flag_create(t_format *format, char *flag)
 {
 	long long		value;
@@ -55,16 +39,16 @@ static long long	flag_create(t_format *format, char *flag)
 		value = format->arg.character;
 	else if (ft_strequ(format->size, "h"))
 		value = format->arg.s_short;
-	else if (ft_strequ(format->size, "l"))
+	else if (ft_strequ(format->size, "l") || format->type == 'D')
 		value = format->arg.l_integer;
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		value = format->arg.ll_integer;
 	else if (ft_strequ(format->size, "t"))
 		value = format->arg.ptrdiff;
-	else if (ft_strequ(format->size, "j"))
-		value = format->arg.intmax;
-	else if (ft_strequ(format->size, "z"))
+	else if (ft_strchr(format->size, 'z'))
 		value = format->arg.ssizet;
+	else if (ft_strchr(format->size, 'j'))
+		value = format->arg.intmax;
 	else
 		value = format->arg.integer;
 	if (format->flag_plus || value < 0)

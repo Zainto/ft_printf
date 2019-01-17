@@ -6,7 +6,7 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:40:22 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/15 14:51:47 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:47:04 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void		extract_flags(char **spec, t_format *format)
 		format->flag_plus = 1;
 		format->flag_space = 0;
 	}
-	else if (**spec == '0'  && !format->flag_minus)
-		format->flag_zero = 1;
+	else if (**spec == '0' && !format->flag_minus && format->flag_zero == 0)
+		format->flag_zero = ft_strchr(*spec, '.') ? -1 : 1;
 	else if (**spec == ' ' && !format->flag_plus)
 		format->flag_space = 1;
 	else if (**spec == '#')
@@ -65,6 +65,8 @@ void		extract_precision(char **spec, t_format *format, va_list args)
 {
 	size_t		point;
 
+	if (**spec != '.')
+		return ;
 	point = ft_strspn(*spec, ".");
 	*spec += point;
 	format->diff += point;
@@ -83,9 +85,7 @@ void		extract_precision(char **spec, t_format *format, va_list args)
 			format->diff++;
 		}
 	}
-	point = ft_strspn(*spec, ".");
-	*spec += point;
-	format->diff += point;
+	return (extract_precision(spec, format, args));
 }
 
 void		extract_size(char **spec, t_format *format)
@@ -132,10 +132,7 @@ int			extract_type(char **spec, t_format *format, va_list args)
 		format->precision = format->precision == -1 ? 1 : format->precision;
 		type_unsigned_integer(format, args);
 		if (format->flag_hashtag && !format->arg.u_character)
-		{
-			format->flag_hashtag = 0;
-			format->precision += format->type == 'o' ? 1 : 0;
-		}
+			format->flag_hashtag = ft_strchr("Oo", format->type) ? 1 : 0;
 	}
 	else if (ft_strchr(FLOAT, format->type))
 		type_float(format, args);

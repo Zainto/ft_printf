@@ -6,18 +6,17 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 01:10:05 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/15 11:47:07 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:47:24 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void				type_signed_integer(t_format *format, va_list args)
 {
-	if (format->size == NULL)
-		format->arg.integer = va_arg(args, int);
-	else if (ft_strequ(format->size, "j"))
+	if (ft_strequ(format->size, "l") || format->type == 'D')
+		format->arg.l_integer = va_arg(args, long int);
+	else if (ft_strchr(format->size, 'j'))
 		format->arg.intmax = va_arg(args, intmax_t);
 	else if (ft_strequ(format->size, "hh"))
 	{
@@ -29,14 +28,14 @@ void				type_signed_integer(t_format *format, va_list args)
 		format->arg.integer = va_arg(args, int);
 		format->arg.s_short = (short)format->arg.integer;
 	}
-	else if (ft_strequ(format->size, "l") || format->type == 'D')
-		format->arg.l_integer = va_arg(args, long int);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		format->arg.ll_integer = va_arg(args, long long int);
-	else if (ft_strequ(format->size, "z") || ft_strequ(format->size, "I"))
+	else if (ft_strchr(format->size, 'z') || ft_strequ(format->size, "I"))
 		format->arg.ssizet = va_arg(args, ssize_t);
 	else if (ft_strequ(format->size, "t") || ft_strequ(format->size, "I"))
 		format->arg.ptrdiff = va_arg(args, ptrdiff_t);
+	else
+		format->arg.integer = va_arg(args, int);
 	format->convert = digit;
 }
 
@@ -44,7 +43,7 @@ static t_convert	unsigned_converter(t_format *format)
 {
 	if (format->type == 'b')
 		return (binary);
-	if (format->type == 'o')
+	if (format->type == 'o' || format->type == 'O')
 		return (octal);
 	if (format->type == 'x' || format->type == 'X')
 		return (hexadecimal);
@@ -54,10 +53,8 @@ static t_convert	unsigned_converter(t_format *format)
 
 void				type_unsigned_integer(t_format *format, va_list args)
 {
-	if (ft_strequ(format->size, "l") || format->type == 'U')
+	if (ft_strequ(format->size, "l") || ft_strchr("OU", format->type))
 		format->arg.ul_integer = va_arg(args, unsigned long int);
-	else if (format->size == NULL)
-		format->arg.u_integer = va_arg(args, int);
 	else if (ft_strequ(format->size, "hh"))
 	{
 		format->arg.u_integer = va_arg(args, int);
@@ -76,6 +73,8 @@ void				type_unsigned_integer(t_format *format, va_list args)
 		format->arg.sizet = va_arg(args, size_t);
 	else if (ft_strequ(format->size, "t") || ft_strequ(format->size, "I"))
 		format->arg.ptrdiff = va_arg(args, ptrdiff_t);
+	else
+		format->arg.u_integer = va_arg(args, int);
 	format->convert = unsigned_converter(format);
 }
 
@@ -83,7 +82,9 @@ void				type_float(t_format *format, va_list args)
 {
 	if (format->size == NULL)
 		format->arg.s_double = va_arg(args, double);
-	if (ft_strequ(format->size, "l") || ft_strequ(format->size, "L"))
+	else if (ft_strequ(format->size, "l") || ft_strequ(format->size, "L"))
+		format->arg.l_double = va_arg(args, long double);
+	else if (ft_strequ(format->size, "l") || ft_strequ(format->size, "L"))
 		format->arg.l_double = va_arg(args, long double);
 	if (format->precision == -1)
 		format->precision = 6;

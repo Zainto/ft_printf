@@ -6,11 +6,12 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:47:35 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/04 00:19:10 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:53:09 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	octal(t_format *format)
 {
@@ -25,7 +26,8 @@ void	octal(t_format *format)
 		ft_strdel(&holder);
 	len = ft_strlen(tmp);
 	if (format->flag_hashtag)
-		format->precision = ft_strlen(tmp) + 1;
+		if (*tmp != '0')
+			format->precision = ft_strlen(tmp) + 1;
 	if ((format->precision -= len) > 0)
 		tmp = precision(format, tmp);
 	format->width = format->width - ft_strlen(tmp);

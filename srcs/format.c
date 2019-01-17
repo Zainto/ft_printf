@@ -6,7 +6,7 @@
 /*   By: cempassi <cempassi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 19:38:06 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/10 11:18:21 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:46:43 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void		format_init(t_format *format)
 {
 	format->id = 0;
 	format->valid = 1;
-	format->type = 0;
 	format->flag_minus = 0;
 	format->flag_plus = 0;
 	format->flag_zero = 0;
 	format->flag_space = 0;
 	format->flag_hashtag = 0;
+	format->type = 0;
 	format->diff = 0;
 	format->width = 0;
 	format->precision = -1;
@@ -32,11 +32,13 @@ static void		format_init(t_format *format)
 
 static t_list	*parser(char *spec, va_list args)
 {
+	char		*holder;
 	t_format	format;
 
 	format_init(&format);
 	if (spec)
 	{
+		holder = spec;
 		spec++;
 		format.diff += 1;
 		if (ft_strchr(FLAGS, *spec))

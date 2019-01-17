@@ -6,28 +6,12 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:38:49 by nrechati          #+#    #+#             */
-/*   Updated: 2019/01/15 13:50:04 by nrechati         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:56:56 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <limits.h>
-
-static char			*sign(t_format *format, char *tmp, char flag)
-{
-	int i;
-
-	i = 0;
-	while (tmp[i] == ' ' && tmp[i + 1] == ' ')
-		i++;
-	if (tmp[i] == ' ')
-		tmp[i] = flag;
-	else if (tmp[i] == '0' && format->precision < 0)
-		tmp[i] = flag;
-	else
-		tmp = ft_strinsert(&tmp, flag, 0);
-	return (tmp);
-}
 
 static long double	flag_create(t_format *format, char *flag)
 {
@@ -43,31 +27,45 @@ static long double	flag_create(t_format *format, char *flag)
 	return (*flag == '-' && value != LONG_MIN ? -value : value);
 }
 
-static void			fill_float(t_format *format, char **tmp)
+static char			*round_double(long double value)
+{
+	int		prev;
+	int		curr;
+	int		diff;
+	char	*holder;
+
+	prev = (int)value;
+	value *= 10;
+	curr = (int)value;
+	value *= 10;
+	diff = (int)value - (curr * 10);
+	if (diff >= 5)
+		holder = ft_itoa(curr - (prev * 10) + 1);
+	else
+		holder = ft_itoa(curr - (prev * 10));
+	return (holder);
+}
+
+static void			fill_float(t_format *format, char **tmp, long double value)
 {
 	int		i;
 	int		prev;
 	int		curr;
+	char	*holder;
 
 	prev = 0;
 	curr = 0;
 	i = -1;
 	while (++i < format->precision - 1)
 	{
-		prev = ft_abs((int)format->arg.s_double);
-		format->arg.s_double *= 10;
-		curr = ft_abs(((int)format->arg.s_double));
-		*tmp = ft_strcat(*tmp, ft_itoa(curr - (prev * 10)));
+		prev = (int)value;
+		value *= 10;
+		curr = (int)value;
+		holder = ft_itoa(curr - (prev * 10));
+		*tmp = ft_strinsert(tmp, *holder, ft_strlen(*tmp));
 	}
-	prev = ft_abs((int)format->arg.s_double);
-	format->arg.s_double *= 10;
-	curr = ft_abs(((int)format->arg.s_double));
-	format->arg.s_double *= 10;
-	i = ft_abs((((int)format->arg.s_double) - (curr * 10)));
-	if (i >= 5)
-		*tmp = ft_strcat(*tmp, ft_itoa(curr - (prev * 10) + 1));
-	else
-		*tmp = ft_strcat(*tmp, ft_itoa(curr - (prev * 10)));
+	holder = round_double(value);
+	*tmp = ft_strinsert(tmp, *holder, ft_strlen(*tmp));
 	return ;
 }
 
@@ -75,22 +73,24 @@ void				doubles(t_format *format)
 {
 	char		flag;
 	char		*tmp;
-	char		*dst;
 	long double	value;
 
 	flag = ' ';
+	tmp = NULL;
 	value = flag_create(format, &flag);
-	tmp = ft_strnew(20);
-	tmp = ft_strcpy(tmp, ft_itoa(ft_abs((int)format->arg.s_double)));
-	tmp = ft_strcat(tmp, ".");
-	fill_float(format, &tmp);
-	dst = ft_strdup(tmp);
-	ft_strdel(&tmp);
-	format->width = format->width - ft_strlen(dst);
-	if (format->width > 0)
-		dst = width(format, dst);
+	tmp = ft_itoa(value);
+	tmp = ft_strinsert(&tmp, '.', ft_strlen(tmp));
+	fill_float(format, &tmp, value);
+	format->width = format->width - ft_strlen(tmp);
 	if (format->flag_plus || format->flag_space || flag == '-')
-		dst = sign(format, dst, flag);
-	format->output = dst;
+	{
+		if (format->flag_minus || (format->flag_zero))
+			format->width -= 1;
+	}
+	if (format->width > 0)
+		tmp = width(format, tmp);
+	if (format->flag_plus || format->flag_space || flag == '-')
+		tmp = sign(format, tmp, flag);
+	format->output = tmp;
 	return ;
 }

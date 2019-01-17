@@ -6,12 +6,12 @@
 /*   By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 17:08:00 by cempassi          #+#    #+#             */
-/*   Updated: 2019/01/15 15:14:16 by cempassi         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:10:22 by cempassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 char		*precision(t_format *format, char *tmp)
 {
 	char	*holder;
@@ -22,6 +22,7 @@ char		*precision(t_format *format, char *tmp)
 	ft_memset(prc, '0', format->precision);
 	tmp = ft_strjoin(prc, holder);
 	ft_strdel(&holder);
+	ft_strdel(&prc);
 	return (tmp);
 }
 
@@ -32,7 +33,7 @@ char		*width(t_format *format, char *tmp)
 
 	holder = tmp;
 	width = ft_strnew(format->width);
-	if (format->flag_zero)
+	if (format->flag_zero == 1)
 		ft_memset(width, '0', format->width);
 	else
 		ft_memset(width, ' ', format->width);
@@ -71,12 +72,28 @@ char		*prefix(t_format *format, char *tmp)
 	return (tmp);
 }
 
+char		*sign(t_format *format, char *tmp, char flag)
+{
+	int i;
+
+	i = 0;
+	while (tmp[i] == ' ' && tmp[i + 1] == ' ')
+		i++;
+	if (tmp[i] == ' ')
+		tmp[i] = flag;
+	else if (tmp[i] == '0' && format->precision < 0)
+		tmp[i] = flag;
+	else
+		tmp = ft_strinsert(&tmp, flag, 0);
+	return (tmp);
+}
+
 char		*unsigned_convert(t_format *format)
 {
 	char	*tmp;
 
 	tmp = NULL;
-	if (ft_strequ(format->size, "l") || format->type == 'U')
+	if (ft_strequ(format->size, "l") || ft_strchr("OU", format->type))
 		tmp = ft_ullitoa(format->arg.ul_integer);
 	else if (ft_strequ(format->size, "ll") || ft_strequ(format->size, "L"))
 		tmp = ft_ullitoa(format->arg.ull_integer);
