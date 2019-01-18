@@ -6,7 +6,7 @@
 #    By: nrechati <nrechati@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 22:26:25 by cempassi          #+#    #+#              #
-#    Updated: 2019/01/18 11:49:25 by cempassi         ###   ########.fr        #
+#    Updated: 2019/01/18 13:00:55 by cempassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,11 +164,6 @@ OBJS = $(patsubst %.c, ./%.o, $(SRCS))
 
 all : $(NAME)
 
-run : all
-	$(COMPILE) $(CFLAGS) ../main.c -o main.o
-	$(CC) -o $(EXEC) $(NAME) main.o
-	./$(EXEC)
-
 $(NAME): $(OBJS) 
 	ar -rus $@ $^
 
@@ -177,7 +172,6 @@ $(OBJS) : ./%.o : $(SPATH)%.c $(SRCS)
 
 clean :
 	$(CLEANUP) $(OBJS)
-	$(CLEANUP) main.o
 
 fclean : clean
 	$(CLEANUP) $(NAME)
@@ -185,4 +179,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re
